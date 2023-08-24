@@ -2,8 +2,8 @@ import Config
 
 # Configure your database
 config :erwan, Erwan.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "admin",
+  password: "postgres_passwd",
   hostname: "localhost",
   database: "erwan_dev",
   stacktrace: true,
