@@ -1,0 +1,37 @@
+version: '3.7'
+
+x-postgres-variables:
+  &postgres-variables
+  TZ: Europe/Paris
+  #POSTGRES_USER: ${POSTGRES_USER}
+  #POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  POSTGRES_USER: admin
+  POSTGRES_PASSWORD: postgres_passwd
+
+
+services:
+  mvp-postgres:
+    hostname: "mvp-postgres"
+    image: postgres:13.3
+    #image: test-postgres:latest
+    container_name: postgres_container
+    environment:
+      <<: *postgres-variables
+    ports:
+      - "5432:5432"
+    restart: on-failure
+    command:
+      - "postgres"
+      - "-cmax_connections=200"
+    volumes:
+      #- "${PWD}/postgres_repo/create-multiple-postgresql-databases.sh:/docker-entrypoint-initdb.d/01-7lieues-initdb.sh"
+      #- "${PWD}/postgres_repo/${POSTGRES_BACKUP_INIT_KEYCLOAK}.sql:/docker-entrypoint-initdb.d/${POSTGRES_BACKUP_INIT_KEYCLOAK_ORDER}-${POSTGRES_BACKUP_INIT_KEYCLOAK}.pgdata"
+      - "${PWD}/postgres_repo/postgres-data:/var/lib/postgresql/data"
+    #networks:
+    #  - backend
+
+#networks:
+#  backend:
+#    name: local_backend
+#    driver: drive
+
