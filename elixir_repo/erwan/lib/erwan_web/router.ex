@@ -18,6 +18,12 @@ defmodule ErwanWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    live "/produits", ProduitsLive.Index, :index
+    live "/produits/new", ProduitsLive.Index, :new
+    live "/produits/:id/edit", ProduitsLive.Index, :edit
+
+    live "/produits/:id", ProduitsLive.Show, :show
+    live "/produits/:id/show/edit", ProduitsLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

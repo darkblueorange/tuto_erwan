@@ -1,0 +1,43 @@
+<.header>
+  Listing Produits
+  <:actions>
+    <.link patch={~p"/produits/new"}>
+      <.button>New Produits</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="produits"
+  rows={@streams.produits_collection}
+  row_click={fn {_id, produits} -> JS.navigate(~p"/produits/#{produits}") end}
+>
+  <:col :let={{_id, produits}} label="Nom"><%= produits.nom %></:col>
+  <:col :let={{_id, produits}} label="Categorie"><%= produits.categorie %></:col>
+  <:col :let={{_id, produits}} label="Nombre"><%= produits.nombre %></:col>
+  <:action :let={{_id, produits}}>
+    <div class="sr-only">
+      <.link navigate={~p"/produits/#{produits}"}>Show</.link>
+    </div>
+    <.link patch={~p"/produits/#{produits}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, produits}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: produits.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="produits-modal" show on_cancel={JS.patch(~p"/produits")}>
+  <.live_component
+    module={ErwanWeb.ProduitsLive.FormComponent}
+    id={@produits.id || :new}
+    title={@page_title}
+    action={@live_action}
+    produits={@produits}
+    patch={~p"/produits"}
+  />
+</.modal>
