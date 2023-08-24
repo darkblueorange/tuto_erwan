@@ -101,4 +101,100 @@ defmodule Erwan.SuperTrucs do
   def change_produits(%Produits{} = produits, attrs \\ %{}) do
     Produits.changeset(produits, attrs)
   end
+
+  alias Erwan.SuperTrucs.Utilisateurs
+
+  @doc """
+  Returns the list of utilisateurs.
+
+  ## Examples
+
+      iex> list_utilisateurs()
+      [%Utilisateurs{}, ...]
+
+  """
+  def list_utilisateurs do
+    Repo.all(Utilisateurs)
+  end
+
+  @doc """
+  Gets a single utilisateurs.
+
+  Raises `Ecto.NoResultsError` if the Utilisateurs does not exist.
+
+  ## Examples
+
+      iex> get_utilisateurs!(123)
+      %Utilisateurs{}
+
+      iex> get_utilisateurs!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_utilisateurs!(id), do: Repo.get!(Utilisateurs, id)
+
+  @doc """
+  Creates a utilisateurs.
+
+  ## Examples
+
+      iex> create_utilisateurs(%{field: value})
+      {:ok, %Utilisateurs{}}
+
+      iex> create_utilisateurs(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_utilisateurs(attrs \\ %{}) do
+    %Utilisateurs{}
+    |> Utilisateurs.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a utilisateurs.
+
+  ## Examples
+
+      iex> update_utilisateurs(utilisateurs, %{field: new_value})
+      {:ok, %Utilisateurs{}}
+
+      iex> update_utilisateurs(utilisateurs, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_utilisateurs(%Utilisateurs{} = utilisateurs, attrs) do
+    utilisateurs
+    |> Utilisateurs.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a utilisateurs.
+
+  ## Examples
+
+      iex> delete_utilisateurs(utilisateurs)
+      {:ok, %Utilisateurs{}}
+
+      iex> delete_utilisateurs(utilisateurs)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_utilisateurs(%Utilisateurs{} = utilisateurs) do
+    Repo.delete(utilisateurs)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking utilisateurs changes.
+
+  ## Examples
+
+      iex> change_utilisateurs(utilisateurs)
+      %Ecto.Changeset{data: %Utilisateurs{}}
+
+  """
+  def change_utilisateurs(%Utilisateurs{} = utilisateurs, attrs \\ %{}) do
+    Utilisateurs.changeset(utilisateurs, attrs)
+  end
 end

@@ -24,6 +24,9 @@ defmodule ErwanWeb.Router do
 
     live "/produits/:id", ProduitsLive.Show, :show
     live "/produits/:id/show/edit", ProduitsLive.Show, :edit
+
+    # get "/utilisateurs", UtilisateursController, :index
+    resources "/utilisateurs", UtilisateursController
   end
 
   # Other scopes may use custom stacks.

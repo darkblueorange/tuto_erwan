@@ -1,0 +1,17 @@
+<.header>
+  Utilisateurs <%= @utilisateurs.id %>
+  <:subtitle>This is a utilisateurs record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/utilisateurs/#{@utilisateurs}/edit"}>
+      <.button>Edit utilisateurs</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Prenom"><%= @utilisateurs.prenom %></:item>
+  <:item title="Nom"><%= @utilisateurs.nom %></:item>
+  <:item title="Age"><%= @utilisateurs.age %></:item>
+</.list>
+
+<.back navigate={~p"/utilisateurs"}>Back to utilisateurs</.back>
