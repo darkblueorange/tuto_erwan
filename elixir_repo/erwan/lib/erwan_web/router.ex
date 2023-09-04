@@ -27,6 +27,14 @@ defmodule ErwanWeb.Router do
 
     # get "/utilisateurs", UtilisateursController, :index
     resources "/utilisateurs", UtilisateursController
+
+    live "/parkings", ParkingLive.Index, :index
+    live "/parkings/new", ParkingLive.Index, :new
+    live "/parkings/:id/edit", ParkingLive.Index, :edit
+
+    live "/parkings/:id", ParkingLive.Show, :show
+    live "/parkings/:id/show/edit", ParkingLive.Show, :edit
+
   end
 
   # Other scopes may use custom stacks.

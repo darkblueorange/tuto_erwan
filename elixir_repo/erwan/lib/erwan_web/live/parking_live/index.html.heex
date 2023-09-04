@@ -1,0 +1,48 @@
+<.header>
+  Listing Parkings
+  <:actions>
+    <.link patch={~p"/parkings/new"}>
+      <.button>New Parking</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="parkings"
+  rows={@streams.parkings}
+  row_click={fn {_id, parking} -> JS.navigate(~p"/parkings/#{parking}") end}
+>
+  <:col :let={{_id, parking}} label="Nom"><%= parking.nom %></:col>
+  <:col :let={{_id, parking}} label="Places"><%= parking.places %></:col>
+  <:col :let={{_id, parking}} label="Capacite"><%= parking.capacite %></:col>
+  <:col :let={{_id, parking}} label="Derniere mise a jour base"><%= parking.derniere_mise_a_jour_base %></:col>
+  <:col :let={{_id, parking}} label="Derniere actualisation bo"><%= parking.derniere_actualisation_bo %></:col>
+  <:col :let={{_id, parking}} label="Taux doccupation"><%= parking.taux_doccupation %></:col>
+  <:col :let={{_id, parking}} label="Geo point 2d"><%= parking.geo_point_2d %></:col>
+  <:col :let={{_id, parking}} label="Parking"><%= parking.parking_id %></:col>
+  <:action :let={{_id, parking}}>
+    <div class="sr-only">
+      <.link navigate={~p"/parkings/#{parking}"}>Show</.link>
+    </div>
+    <.link patch={~p"/parkings/#{parking}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, parking}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: parking.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="parking-modal" show on_cancel={JS.patch(~p"/parkings")}>
+  <.live_component
+    module={ErwanWeb.ParkingLive.FormComponent}
+    id={@parking.id || :new}
+    title={@page_title}
+    action={@live_action}
+    parking={@parking}
+    patch={~p"/parkings"}
+  />
+</.modal>

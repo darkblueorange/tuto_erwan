@@ -1,0 +1,33 @@
+<.header>
+  Parking <%= @parking.id %>
+  <:subtitle>This is a parking record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/parkings/#{@parking}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit parking</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Nom"><%= @parking.nom %></:item>
+  <:item title="Places"><%= @parking.places %></:item>
+  <:item title="Capacite"><%= @parking.capacite %></:item>
+  <:item title="Derniere mise a jour base"><%= @parking.derniere_mise_a_jour_base %></:item>
+  <:item title="Derniere actualisation bo"><%= @parking.derniere_actualisation_bo %></:item>
+  <:item title="Taux doccupation"><%= @parking.taux_doccupation %></:item>
+  <:item title="Geo point 2d"><%= @parking.geo_point_2d %></:item>
+  <:item title="Parking"><%= @parking.parking_id %></:item>
+</.list>
+
+<.back navigate={~p"/parkings"}>Back to parkings</.back>
+
+<.modal :if={@live_action == :edit} id="parking-modal" show on_cancel={JS.patch(~p"/parkings/#{@parking}")}>
+  <.live_component
+    module={ErwanWeb.ParkingLive.FormComponent}
+    id={@parking.id}
+    title={@page_title}
+    action={@live_action}
+    parking={@parking}
+    patch={~p"/parkings/#{@parking}"}
+  />
+</.modal>
