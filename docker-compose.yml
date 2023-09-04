@@ -24,8 +24,6 @@ services:
       - "postgres"
       - "-cmax_connections=200"
     volumes:
-      #- "${PWD}/postgres_repo/create-multiple-postgresql-databases.sh:/docker-entrypoint-initdb.d/01-7lieues-initdb.sh"
-      #- "${PWD}/postgres_repo/${POSTGRES_BACKUP_INIT_KEYCLOAK}.sql:/docker-entrypoint-initdb.d/${POSTGRES_BACKUP_INIT_KEYCLOAK_ORDER}-${POSTGRES_BACKUP_INIT_KEYCLOAK}.pgdata"
       - "${PWD}/postgres_repo/postgres-data:/var/lib/postgresql/data"
     #networks:
     #  - backend
