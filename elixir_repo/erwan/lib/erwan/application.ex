@@ -10,6 +10,8 @@ defmodule Erwan.Application do
     children = [
       # Start the Telemetry supervisor
       ErwanWeb.Telemetry,
+      # Ping the ParkingDataAPI
+      Erwan.RetrieveParkingData,
       # Start the Ecto repository
       Erwan.Repo,
       # Start the PubSub system

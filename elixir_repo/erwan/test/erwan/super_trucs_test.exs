@@ -95,7 +95,9 @@ defmodule Erwan.SuperTrucsTest do
       utilisateurs = utilisateurs_fixture()
       update_attrs = %{prenom: "some updated prenom", nom: "some updated nom", age: 43}
 
-      assert {:ok, %Utilisateurs{} = utilisateurs} = SuperTrucs.update_utilisateurs(utilisateurs, update_attrs)
+      assert {:ok, %Utilisateurs{} = utilisateurs} =
+               SuperTrucs.update_utilisateurs(utilisateurs, update_attrs)
+
       assert utilisateurs.prenom == "some updated prenom"
       assert utilisateurs.nom == "some updated nom"
       assert utilisateurs.age == 43
@@ -103,7 +105,10 @@ defmodule Erwan.SuperTrucsTest do
 
     test "update_utilisateurs/2 with invalid data returns error changeset" do
       utilisateurs = utilisateurs_fixture()
-      assert {:error, %Ecto.Changeset{}} = SuperTrucs.update_utilisateurs(utilisateurs, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               SuperTrucs.update_utilisateurs(utilisateurs, @invalid_attrs)
+
       assert utilisateurs == SuperTrucs.get_utilisateurs!(utilisateurs.id)
     end
 

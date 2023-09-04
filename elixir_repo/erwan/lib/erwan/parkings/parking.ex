@@ -18,7 +18,25 @@ defmodule Erwan.Parkings.Parking do
   @doc false
   def changeset(parking, attrs) do
     parking
-    |> cast(attrs, [:nom, :places, :capacite, :derniere_mise_a_jour_base, :derniere_actualisation_bo, :taux_doccupation, :geo_point_2d, :parking_id])
-    |> validate_required([:nom, :places, :capacite, :derniere_mise_a_jour_base, :derniere_actualisation_bo, :taux_doccupation, :geo_point_2d, :parking_id])
+    |> cast(attrs, [
+      :nom,
+      :places,
+      :capacite,
+      :derniere_mise_a_jour_base,
+      :derniere_actualisation_bo,
+      :taux_doccupation,
+      :geo_point_2d,
+      :parking_id
+    ])
+    |> validate_required([
+      :nom,
+      :places,
+      :capacite,
+      :derniere_mise_a_jour_base,
+      :derniere_actualisation_bo,
+      :taux_doccupation,
+      :geo_point_2d,
+      :parking_id
+    ])
   end
 end

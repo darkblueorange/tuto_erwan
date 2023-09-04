@@ -34,7 +34,6 @@ defmodule ErwanWeb.Router do
 
     live "/parkings/:id", ParkingLive.Show, :show
     live "/parkings/:id/show/edit", ParkingLive.Show, :edit
-
   end
 
   # Other scopes may use custom stacks.

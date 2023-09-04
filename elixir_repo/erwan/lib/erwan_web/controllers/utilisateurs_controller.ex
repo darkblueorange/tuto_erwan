@@ -5,8 +5,10 @@ defmodule ErwanWeb.UtilisateursController do
   alias Erwan.SuperTrucs.Utilisateurs
 
   def index(conn, _params) do
-    utilisateurs = SuperTrucs.list_utilisateurs()
-    |> IO.inspect(label: "utilisateurs >> ")
+    utilisateurs =
+      SuperTrucs.list_utilisateurs()
+      |> IO.inspect(label: "utilisateurs >> ")
+
     render(conn, :index, utilisateurs: utilisateurs)
   end
 

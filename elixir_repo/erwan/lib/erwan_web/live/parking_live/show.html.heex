@@ -21,7 +21,12 @@
 
 <.back navigate={~p"/parkings"}>Back to parkings</.back>
 
-<.modal :if={@live_action == :edit} id="parking-modal" show on_cancel={JS.patch(~p"/parkings/#{@parking}")}>
+<.modal
+  :if={@live_action == :edit}
+  id="parking-modal"
+  show
+  on_cancel={JS.patch(~p"/parkings/#{@parking}")}
+>
   <.live_component
     module={ErwanWeb.ParkingLive.FormComponent}
     id={@parking.id}

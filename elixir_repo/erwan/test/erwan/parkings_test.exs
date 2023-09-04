@@ -8,7 +8,16 @@ defmodule Erwan.ParkingsTest do
 
     import Erwan.ParkingsFixtures
 
-    @invalid_attrs %{nom: nil, places: nil, capacite: nil, derniere_mise_a_jour_base: nil, derniere_actualisation_bo: nil, taux_doccupation: nil, geo_point_2d: nil, parking_id: nil}
+    @invalid_attrs %{
+      nom: nil,
+      places: nil,
+      capacite: nil,
+      derniere_mise_a_jour_base: nil,
+      derniere_actualisation_bo: nil,
+      taux_doccupation: nil,
+      geo_point_2d: nil,
+      parking_id: nil
+    }
 
     test "list_parkings/0 returns all parkings" do
       parking = parking_fixture()
@@ -21,7 +30,16 @@ defmodule Erwan.ParkingsTest do
     end
 
     test "create_parking/1 with valid data creates a parking" do
-      valid_attrs = %{nom: "some nom", places: "some places", capacite: "some capacite", derniere_mise_a_jour_base: "some derniere_mise_a_jour_base", derniere_actualisation_bo: ~N[2023-09-03 16:29:00], taux_doccupation: ~N[2023-09-03 16:29:00], geo_point_2d: %{}, parking_id: 42}
+      valid_attrs = %{
+        nom: "some nom",
+        places: "some places",
+        capacite: "some capacite",
+        derniere_mise_a_jour_base: "some derniere_mise_a_jour_base",
+        derniere_actualisation_bo: ~N[2023-09-03 16:29:00],
+        taux_doccupation: ~N[2023-09-03 16:29:00],
+        geo_point_2d: %{},
+        parking_id: 42
+      }
 
       assert {:ok, %Parking{} = parking} = Parkings.create_parking(valid_attrs)
       assert parking.nom == "some nom"
@@ -40,7 +58,17 @@ defmodule Erwan.ParkingsTest do
 
     test "update_parking/2 with valid data updates the parking" do
       parking = parking_fixture()
-      update_attrs = %{nom: "some updated nom", places: "some updated places", capacite: "some updated capacite", derniere_mise_a_jour_base: "some updated derniere_mise_a_jour_base", derniere_actualisation_bo: ~N[2023-09-04 16:29:00], taux_doccupation: ~N[2023-09-04 16:29:00], geo_point_2d: %{}, parking_id: 43}
+
+      update_attrs = %{
+        nom: "some updated nom",
+        places: "some updated places",
+        capacite: "some updated capacite",
+        derniere_mise_a_jour_base: "some updated derniere_mise_a_jour_base",
+        derniere_actualisation_bo: ~N[2023-09-04 16:29:00],
+        taux_doccupation: ~N[2023-09-04 16:29:00],
+        geo_point_2d: %{},
+        parking_id: 43
+      }
 
       assert {:ok, %Parking{} = parking} = Parkings.update_parking(parking, update_attrs)
       assert parking.nom == "some updated nom"

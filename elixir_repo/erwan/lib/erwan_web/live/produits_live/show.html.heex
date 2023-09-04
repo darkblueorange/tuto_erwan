@@ -16,7 +16,12 @@
 
 <.back navigate={~p"/produits"}>Back to produits</.back>
 
-<.modal :if={@live_action == :edit} id="produits-modal" show on_cancel={JS.patch(~p"/produits/#{@produits}")}>
+<.modal
+  :if={@live_action == :edit}
+  id="produits-modal"
+  show
+  on_cancel={JS.patch(~p"/produits/#{@produits}")}
+>
   <.live_component
     module={ErwanWeb.ProduitsLive.FormComponent}
     id={@produits.id}

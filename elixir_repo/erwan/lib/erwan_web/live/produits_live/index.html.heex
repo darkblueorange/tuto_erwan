@@ -31,7 +31,12 @@
   </:action>
 </.table>
 
-<.modal :if={@live_action in [:new, :edit]} id="produits-modal" show on_cancel={JS.patch(~p"/produits")}>
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="produits-modal"
+  show
+  on_cancel={JS.patch(~p"/produits")}
+>
   <.live_component
     module={ErwanWeb.ProduitsLive.FormComponent}
     id={@produits.id || :new}
@@ -41,5 +46,5 @@
     patch={~p"/produits"}
   />
 </.modal>
-<br>
+<br />
 <span><.link navigate={~p"/"}>Retour Accueil</.link></span>
