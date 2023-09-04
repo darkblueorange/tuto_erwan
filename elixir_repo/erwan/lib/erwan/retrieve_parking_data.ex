@@ -8,6 +8,7 @@ defmodule Erwan.RetrieveParkingData do
   require Logger
 
   # alias Erwan.Repo
+  alias Erwan.Parkings
 
   def child_spec(opts) do
     %{
@@ -28,12 +29,13 @@ defmodule Erwan.RetrieveParkingData do
   def send_as_loop() do
     Task.start(fn ->
       Logger.info("sending every second a request")
-      :timer.sleep(2000)
+      :timer.sleep(15000)
 
       send_to()
       |> case do
         {:ok, result} ->
           Logger.info("Data received: #{inspect(result)}")
+          result["results"] |> data_decode()
           send_as_loop()
 
         {:error, error} ->
@@ -76,5 +78,35 @@ defmodule Erwan.RetrieveParkingData do
         Logger.error("Unknow error #{inspect(reason)} on #{url}")
         {:error, "Unknown error #{inspect(reason)} on #{url}"}
     end
+  end
+
+  def data_decode(data) do
+    data
+    # |> Repo.
+
+    |> Enum.reduce([], fn
+      %{
+        "id" => parking_id,
+        "nom" => _parking_name,
+        "places" => _free_places,
+        "capacite" => _total_nb_places,
+        "derniere_mise_a_jour_base" => _datetime_ping_db,
+        "derniere_actualisation_bo" => _datetime_ping_real,
+        "taux_doccupation" => _occupancy_rate,
+        "geo_point_2d" => _geopoint
+      } = result,
+      _acc1 ->
+        # geopoint can be %{ "lon" => _longitude, "lat" => _latitude } or nil
+        # Logger.info("Result catched : #{inspect(result)}")
+
+        result
+        |> Map.put("parking_id", parking_id)
+        |> Parkings.create_parking()
+
+      result, acc1 ->
+        # Ignore
+        Logger.warning("Result uncatched: #{inspect(result)}")
+        acc1
+    end)
   end
 end
