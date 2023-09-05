@@ -28,14 +28,20 @@ defmodule Erwan.RetrieveParkingData do
 
   def send_as_loop() do
     Task.start(fn ->
-      Logger.info("sending every second a request")
-      :timer.sleep(15000)
+      Logger.info("sending every 150 seconds a request")
+      :timer.sleep(150_000)
 
       send_to()
       |> case do
         {:ok, result} ->
-          Logger.info("Data received: #{inspect(result)}")
-          result["results"] |> data_decode()
+          result["results"]
+          |> data_decode()
+
+          send_as_loop()
+
+        {:warning, _} ->
+          Logger.warning("Warning catched - relaunching in 5 seconds...")
+          :timer.sleep(5000)
           send_as_loop()
 
         {:error, error} ->
@@ -59,7 +65,7 @@ defmodule Erwan.RetrieveParkingData do
         {:error, "404"}
 
       {:ok, %HTTPoison.Response{status_code: 500}} ->
-        Logger.error("500 Rasa server error on #{url}")
+        Logger.error("500 server error on #{url}")
         {:error, "500"}
 
       {:error, %HTTPoison.Error{reason: :nxdomain}} ->
@@ -68,11 +74,11 @@ defmodule Erwan.RetrieveParkingData do
 
       {:error, %HTTPoison.Error{reason: :timeout}} ->
         Logger.warning("Network Timeout error on #{url}, keeping")
-        {:ok, nil}
+        {:warning, nil}
 
       {:error, %HTTPoison.Error{reason: :connect_timeout}} ->
         Logger.warning("Connect Timeout error on #{url}, keeping")
-        {:ok, nil}
+        {:warning, nil}
 
       {:error, %HTTPoison.Error{reason: reason}} ->
         Logger.error("Unknow error #{inspect(reason)} on #{url}")

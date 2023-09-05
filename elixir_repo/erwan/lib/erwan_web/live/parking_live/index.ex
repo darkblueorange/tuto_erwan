@@ -6,7 +6,16 @@ defmodule ErwanWeb.ParkingLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :parkings, Parkings.list_parkings())}
+    parking_list = Parkings.list_parkings()
+
+    select_parking =
+      Parkings.list_parkings_reduced()
+
+    {:ok,
+     socket
+     |> assign(:select_parking, %{"options" => select_parking})
+     |> assign(:selected_parking, nil)
+     |> stream(:parkings, parking_list)}
   end
 
   @impl true
@@ -43,5 +52,14 @@ defmodule ErwanWeb.ParkingLive.Index do
     {:ok, _} = Parkings.delete_parking(parking)
 
     {:noreply, stream_delete(socket, :parkings, parking)}
+  end
+
+  def handle_event("parking_selected", %{"parking_chosen" => parking_chosen}, socket) do
+    parking_data = Parkings.list_parkings(parking_chosen)
+
+    {:noreply,
+     socket
+     |> stream(:parkings, parking_data, reset: true)
+     |> assign(:selected_parking, parking_chosen)}
   end
 end

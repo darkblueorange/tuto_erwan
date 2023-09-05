@@ -1,7 +1,25 @@
-Test
+Visu data parking live :<br /><br />
 
-<.live_component module={ErwanWeb.Live.VegaGraph} id="vega" />
-<!-- content={arobase content} -->
+<.form for={@select_parking} phx-change="parking_selected">
+  <.input
+    label="Liste des parkings"
+    id="parking-list-select-id"
+    type="select"
+    name="parking_chosen"
+    value=""
+    options={@select_parking}
+  >
+  </.input>
+</.form>
+
+<br /><br />
+<%= if (@selected_parking != nil) do %>
+  <.live_component
+    module={ErwanWeb.Live.VegaGraph}
+    id="vega"
+    selected_parking={@selected_parking}
+  />
+<% end %>
 
 <.header>
   Listing Parkings

@@ -21,6 +21,19 @@ defmodule Erwan.Parkings do
     Repo.all(Parking)
   end
 
+  def list_parkings_reduced() do
+    Parking
+    |> select([p], {p.nom, p.nom})
+    |> distinct(true)
+    |> Repo.all()
+  end
+
+  def list_parkings(parking_name) when parking_name |> is_binary() do
+    Parking
+    |> where([p], p.nom == ^parking_name)
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single parking.
 

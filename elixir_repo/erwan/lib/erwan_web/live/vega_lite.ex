@@ -1,23 +1,36 @@
 defmodule ErwanWeb.Live.VegaGraph do
   use ErwanWeb, :live_component
   alias VegaLite
+  alias Erwan.Parkings
+
+  require Logger
 
   @impl true
-  def update(_, socket) do
+  def update(%{id: "vega"} = assigns, socket) do
     spec =
-      VegaLite.new(title: "Demo", width: :container, height: :container, padding: 5)
+      VegaLite.new(
+        title: "Nb places parking dispo",
+        width: :container,
+        height: :container,
+        padding: 5
+      )
       # Load values. Values are a map with the attributes to be used by Vegalite
-      |> VegaLite.data_from_values(fake_data())
+      |> VegaLite.data_from_values(real_data(assigns.selected_parking))
       # Defines the type of mark to be used
       |> VegaLite.mark(:line)
       # Sets the axis, the key for the data and the type of data
-      |> VegaLite.encode_field(:x, "date", type: :nominal)
-      |> VegaLite.encode_field(:y, "total", type: :quantitative)
+      |> VegaLite.encode_field(:x, "derniere_mise_a_jour_base", type: :nominal)
+      |> VegaLite.encode_field(:y, "places", type: :quantitative)
+
       # Output the specifcation
       |> VegaLite.to_spec()
 
-    socket = assign(socket, id: socket.id)
-    {:ok, push_event(socket, "vega_lite:#{socket.id}:init", %{"spec" => spec})}
+    socket = socket |> assign(id: socket.id)
+    {:ok, socket |> push_event("vega_lite:#{socket.id}:init", %{"spec" => spec})}
+  end
+
+  def handle_event("parking_selected", %{"parking_chosen" => parking_chosen}, socket) do
+    {:noreply, socket}
   end
 
   @impl true
@@ -29,17 +42,32 @@ defmodule ErwanWeb.Live.VegaGraph do
     # Refer again to https://hexdocs.pm/phoenix_live_view/js-interop.html#client-hooks-via-phx-hook
     ~H"""
     <div class="vega">
-      <div style="width:80%; height: 500px" id="vega-graph" phx-hook="VegaLite" phx-update="ignore" data-id={@id}/>
+      <div
+        style="width:80%; height: 500px"
+        id="vega-graph"
+        phx-hook="VegaLite"
+        phx-update="ignore"
+        data-id={@id}
+      />
     </div>
     """
   end
 
-  defp fake_data do
-    today = Date.utc_today()
-    until = today |> Date.add(10)
+  defp real_data do
+    Parkings.list_parkings("BLOSSAC TISON")
+    |> Enum.map(fn parking ->
+      %{}
+      |> Map.put("places", parking.places)
+      |> Map.put("derniere_mise_a_jour_base", parking.derniere_mise_a_jour_base)
+    end)
+  end
 
-    Enum.map(Date.range(today, until), fn date ->
-      %{total: Enum.random(1..100), date: Date.to_iso8601(date), name: "potato"}
+  defp real_data(parking_chosen) do
+    Parkings.list_parkings(parking_chosen)
+    |> Enum.map(fn parking ->
+      %{}
+      |> Map.put("places", parking.places)
+      |> Map.put("derniere_mise_a_jour_base", parking.derniere_mise_a_jour_base)
     end)
   end
 end

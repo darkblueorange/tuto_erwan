@@ -20,8 +20,8 @@ defmodule ErwanWeb.ParkingLive.FormComponent do
         phx-submit="save"
       >
         <.input field={@form[:nom]} type="text" label="Nom" />
-        <.input field={@form[:places]} type="integer" label="Places" />
-        <.input field={@form[:capacite]} type="integer" label="Capacite" />
+        <.input field={@form[:places]} type="number" label="Places" />
+        <.input field={@form[:capacite]} type="number" label="Capacite" />
         <.input
           field={@form[:derniere_mise_a_jour_base]}
           type="datetime-local"
@@ -32,7 +32,7 @@ defmodule ErwanWeb.ParkingLive.FormComponent do
           type="datetime-local"
           label="Derniere actualisation bo"
         />
-        <.input field={@form[:taux_doccupation]} type="float" label="Taux doccupation" />
+        <.input field={@form[:taux_doccupation]} type="number" label="Taux doccupation" />
 
         <.input field={@form[:parking_id]} type="number" label="Parking" />
         <:actions>
@@ -41,6 +41,7 @@ defmodule ErwanWeb.ParkingLive.FormComponent do
       </.simple_form>
     </div>
     """
+
     # <.input field={@form[:geo_point_2d]} type="text" label="Geo point 2d" />
   end
 
