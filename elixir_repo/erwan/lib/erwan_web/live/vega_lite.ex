@@ -25,13 +25,27 @@ defmodule ErwanWeb.Live.VegaGraph do
       )
       # Load values. Values are a map with the attributes to be used by Vegalite
       |> VegaLite.data_from_values(real_data(assigns.selected_parking))
-      # Defines the type of mark to be used
-      |> VegaLite.mark(:line)
-      # Sets the axis, the key for the data and the type of data
       |> VegaLite.encode_field(:x, "derniere_mise_a_jour_base", type: :nominal)
-      |> VegaLite.encode_field(:y, "places", type: :quantitative)
-
-      # Output the specifcation
+      |> VegaLite.layers([
+        VegaLite.new()
+        # Defines the type of mark to be used
+        |> VegaLite.mark(:line, color: "#85C5A6")
+        # Sets the axis, the key for the data and the type of data
+        |> VegaLite.encode_field(:y, "places",
+          type: :quantitative,
+          title: "Nb de places",
+          axis: %{title_color: "#85C5A6"}
+        ),
+        VegaLite.new()
+        |> VegaLite.mark(:line, color: "#85A9C5")
+        |> VegaLite.encode_field(:y, "taux_doccupation",
+          type: :quantitative,
+          title: "Taux d'occupation",
+          axis: %{title_color: "#85A9C5"}
+        )
+      ])
+      |> VegaLite.resolve(:scale, y: :independent)
+      # Output the specification
       |> VegaLite.to_spec()
 
     socket = socket |> assign(id: socket.id)
@@ -58,21 +72,8 @@ defmodule ErwanWeb.Live.VegaGraph do
     """
   end
 
-  # defp real_data do
-  #   Parkings.list_parkings("BLOSSAC TISON")
-  #   |> Enum.map(fn parking ->
-  #     %{}
-  #     |> Map.put("places", parking.places)
-  #     |> Map.put("derniere_mise_a_jour_base", parking.derniere_mise_a_jour_base)
-  #   end)
-  # end
-
   defp real_data(parking_chosen) do
-    Parkings.list_parkings(parking_chosen)
-    |> Enum.map(fn parking ->
-      %{}
-      |> Map.put("places", parking.places)
-      |> Map.put("derniere_mise_a_jour_base", parking.derniere_mise_a_jour_base)
-    end)
+    parking_chosen
+    |> Parkings.list_parkings_vega()
   end
 end

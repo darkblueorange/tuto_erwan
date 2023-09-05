@@ -7,13 +7,13 @@ defmodule ErwanWeb.ParkingLive.Index do
   @impl true
   def mount(_params, _session, socket) do
     parking_list = Parkings.list_parkings()
-
-    select_parking =
-      Parkings.list_parkings_reduced()
+    select_parking = Parkings.list_parkings_reduced()
 
     {:ok,
      socket
-     |> assign(:select_parking, %{"options" => select_parking})
+     |> assign(:select_parking, %{
+       "options" => [{"Tous les parkings", "Tous les parkings"} | select_parking]
+     })
      |> assign(:selected_parking, nil)
      |> stream(:parkings, parking_list)}
   end

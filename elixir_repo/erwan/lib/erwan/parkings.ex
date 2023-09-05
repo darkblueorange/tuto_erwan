@@ -18,7 +18,9 @@ defmodule Erwan.Parkings do
 
   """
   def list_parkings do
-    Repo.all(Parking)
+    Parking
+    |> order_by([p], desc: p.derniere_actualisation_bo)
+    |> Repo.all()
   end
 
   def list_parkings_reduced() do
@@ -28,9 +30,41 @@ defmodule Erwan.Parkings do
     |> Repo.all()
   end
 
+  def list_parkings("Tous les parkings") do
+    Parking
+    |> order_by([p], desc: p.derniere_actualisation_bo)
+    |> Repo.all()
+  end
+
   def list_parkings(parking_name) when parking_name |> is_binary() do
     Parking
     |> where([p], p.nom == ^parking_name)
+    |> order_by([p], desc: p.derniere_actualisation_bo)
+    |> Repo.all()
+  end
+
+  def list_parkings_vega(parking_name) when parking_name |> is_binary() do
+    Parking
+    |> select([p], %{
+      places: p.places,
+      taux_doccupation: p.taux_doccupation,
+      derniere_mise_a_jour_base: p.derniere_mise_a_jour_base
+    })
+    |> where([p], p.nom == ^parking_name)
+    |> order_by([p], desc: p.derniere_actualisation_bo)
+    |> Repo.all()
+  end
+
+  # This function is not correct because timing is not so precise
+  # We should do a window sort of sum to be able to "adjust" timing of update of each parking
+  # Or maybe extrapolate. Too difficult for now
+  def list_parkings_and_sum() do
+    Parking
+    |> group_by([p], [p.derniere_mise_a_jour_base])
+    |> select([p], %{
+      places: sum(p.places),
+      derniere_mise_a_jour_base: p.derniere_mise_a_jour_base
+    })
     |> Repo.all()
   end
 
