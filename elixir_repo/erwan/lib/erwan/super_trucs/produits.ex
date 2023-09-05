@@ -1,4 +1,7 @@
 defmodule Erwan.SuperTrucs.Produits do
+  @moduledoc """
+  Produits Ecto schema.
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

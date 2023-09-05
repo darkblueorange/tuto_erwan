@@ -1,4 +1,13 @@
 defmodule ErwanWeb.Live.VegaGraph do
+  @moduledoc """
+  ErwanWeb.Live.VegaGraph is Vega Implementation as a live_component
+  To add it to another live, just add these lines in the .heex :
+    <.live_component
+      module={ErwanWeb.Live.VegaGraph}
+      id="vega"
+      selected_parking={@selected_parking}
+    />
+  """
   use ErwanWeb, :live_component
   alias VegaLite
   alias Erwan.Parkings
@@ -29,10 +38,6 @@ defmodule ErwanWeb.Live.VegaGraph do
     {:ok, socket |> push_event("vega_lite:#{socket.id}:init", %{"spec" => spec})}
   end
 
-  def handle_event("parking_selected", %{"parking_chosen" => parking_chosen}, socket) do
-    {:noreply, socket}
-  end
-
   @impl true
   def render(assigns) do
     # Here we have the element that will load the embedded view. Special note to data-id which is the
@@ -53,14 +58,14 @@ defmodule ErwanWeb.Live.VegaGraph do
     """
   end
 
-  defp real_data do
-    Parkings.list_parkings("BLOSSAC TISON")
-    |> Enum.map(fn parking ->
-      %{}
-      |> Map.put("places", parking.places)
-      |> Map.put("derniere_mise_a_jour_base", parking.derniere_mise_a_jour_base)
-    end)
-  end
+  # defp real_data do
+  #   Parkings.list_parkings("BLOSSAC TISON")
+  #   |> Enum.map(fn parking ->
+  #     %{}
+  #     |> Map.put("places", parking.places)
+  #     |> Map.put("derniere_mise_a_jour_base", parking.derniere_mise_a_jour_base)
+  #   end)
+  # end
 
   defp real_data(parking_chosen) do
     Parkings.list_parkings(parking_chosen)

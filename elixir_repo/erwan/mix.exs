@@ -5,7 +5,7 @@ defmodule Erwan.MixProject do
     [
       app: :erwan,
       version: "0.1.0",
-      elixir: "~> 1.15.4",
+      elixir: "~> 1.15.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -32,10 +32,11 @@ defmodule Erwan.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:ecto_sql, "~> 3.10"},
-      {:floki, ">= 0.30.0", only: :test},
       {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
       {:finch, "~> 0.13"},
+      {:floki, ">= 0.30.0", only: :test},
       {:gettext, "~> 0.20"},
       {:httpoison, "~> 1.0"},
       {:jason, "~> 1.2"},

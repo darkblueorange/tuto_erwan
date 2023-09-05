@@ -1,4 +1,8 @@
 defmodule ErwanWeb.Telemetry do
+  @moduledoc """
+  Included Telemetry module.
+
+  """
   use Supervisor
   import Telemetry.Metrics
 

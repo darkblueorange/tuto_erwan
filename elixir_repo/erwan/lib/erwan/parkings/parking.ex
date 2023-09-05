@@ -1,11 +1,14 @@
 defmodule Erwan.Parkings.Parking do
+  @moduledoc """
+  Parking Ecto schema.
+
+  field :geo_point_2d, :map is still to be dealt correctly from HTML but not only.
+  """
   use Ecto.Schema
   import Ecto.Changeset
 
   schema "parkings" do
     field :nom, :string
-    # field :places, :string
-    # field :capacite, :string
     field :places, :integer
     field :capacite, :integer
     field :derniere_mise_a_jour_base, :naive_datetime

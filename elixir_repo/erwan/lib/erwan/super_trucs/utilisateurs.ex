@@ -1,4 +1,7 @@
 defmodule Erwan.SuperTrucs.Utilisateurs do
+  @moduledoc """
+  Utilisateurs Ecto schema.
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

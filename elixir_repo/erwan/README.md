@@ -20,3 +20,11 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
 
 Pour icônes SVG : 
 http://svgicons.sparkk.fr/
+
+
+Formattage dans VSCode : 
+https://abletech.nz/resource/how-to-configure-vs-code-to-format-elixir-code/
+https://pragmaticstudio.com/tutorials/formatting-heex-templates-in-vscode
+
+https://marketplace.visualstudio.com/items?itemName=phoenixframework.phoenix
+

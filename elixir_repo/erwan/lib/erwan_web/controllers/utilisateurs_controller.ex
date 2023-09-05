@@ -7,7 +7,6 @@ defmodule ErwanWeb.UtilisateursController do
   def index(conn, _params) do
     utilisateurs =
       SuperTrucs.list_utilisateurs()
-      |> IO.inspect(label: "utilisateurs >> ")
 
     render(conn, :index, utilisateurs: utilisateurs)
   end
