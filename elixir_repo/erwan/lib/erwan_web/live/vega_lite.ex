@@ -25,7 +25,10 @@ defmodule ErwanWeb.Live.VegaGraph do
       )
       # Load values. Values are a map with the attributes to be used by Vegalite
       |> VegaLite.data_from_values(real_data(assigns.selected_parking))
-      |> VegaLite.encode_field(:x, "derniere_mise_a_jour_base", type: :nominal)
+      |> VegaLite.encode_field(:x, "Base temps réel",
+        type: :temporal,
+        axis: %{tick_count: 25}
+      )
       |> VegaLite.layers([
         VegaLite.new()
         # Defines the type of mark to be used
@@ -40,7 +43,7 @@ defmodule ErwanWeb.Live.VegaGraph do
         |> VegaLite.mark(:line, color: "#85A9C5")
         |> VegaLite.encode_field(:y, "taux_doccupation",
           type: :quantitative,
-          title: "Taux d'occupation",
+          title: "Taux d'occupation (en %)",
           axis: %{title_color: "#85A9C5"}
         )
       ])
