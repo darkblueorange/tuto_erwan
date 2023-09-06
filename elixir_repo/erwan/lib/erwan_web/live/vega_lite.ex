@@ -29,26 +29,10 @@ defmodule ErwanWeb.Live.VegaGraph do
         type: :temporal,
         axis: %{tick_count: 25}
       )
-      |> VegaLite.layers([
-        VegaLite.new()
-        # Defines the type of mark to be used
-        |> VegaLite.mark(:line, color: "#85C5A6")
-        # Sets the axis, the key for the data and the type of data
-        |> VegaLite.encode_field(:y, "places",
-          type: :quantitative,
-          title: "Nb de places",
-          axis: %{title_color: "#85C5A6"}
-        ),
-        VegaLite.new()
-        |> VegaLite.mark(:line, color: "#85A9C5")
-        |> VegaLite.encode_field(:y, "taux_doccupation",
-          type: :quantitative,
-          title: "Taux d'occupation (en %)",
-          axis: %{title_color: "#85A9C5"}
-        )
-      ])
-      |> VegaLite.resolve(:scale, y: :independent)
-      # Output the specification
+      |> build_axis(
+        assigns.select_axis_display["place_axis_checkbox"],
+        assigns.select_axis_display["availability_axis_checkbox"]
+      )
       |> VegaLite.to_spec()
 
     socket = socket |> assign(id: socket.id)
@@ -73,6 +57,53 @@ defmodule ErwanWeb.Live.VegaGraph do
       />
     </div>
     """
+  end
+
+  defp build_axis(vl, "true", "false") do
+    vl
+    |> VegaLite.mark(:line, color: "#85C5A6")
+    |> VegaLite.encode_field(:y, "places",
+      type: :quantitative,
+      title: "Nb de places",
+      axis: %{title_color: "#85C5A6"}
+    )
+  end
+
+  defp build_axis(vl, "false", "true") do
+    vl
+    |> VegaLite.mark(:line, color: "#85A9C5")
+    |> VegaLite.encode_field(:y, "taux_doccupation",
+      type: :quantitative,
+      title: "Taux d'occupation (en %)",
+      axis: %{title_color: "#85A9C5"}
+    )
+  end
+
+  defp build_axis(vl, "true", "true") do
+    vl
+    |> VegaLite.layers([
+      VegaLite.new()
+      |> VegaLite.mark(:line, color: "#85C5A6")
+      |> VegaLite.encode_field(:y, "places",
+        type: :quantitative,
+        title: "Nb de places",
+        axis: %{title_color: "#85C5A6"}
+      ),
+      VegaLite.new()
+      |> VegaLite.mark(:line, color: "#85A9C5")
+      |> VegaLite.encode_field(:y, "taux_doccupation",
+        type: :quantitative,
+        title: "Taux d'occupation (en %)",
+        axis: %{title_color: "#85A9C5"}
+      )
+    ])
+    |> VegaLite.resolve(:scale, y: :independent)
+  end
+
+  defp build_axis(vl, "false", "false") do
+    vl
+    |> VegaLite.mark(:line, color: "#85A9C5")
+    |> VegaLite.encode_field(:color, "no data selected !", type: :nominal)
   end
 
   defp real_data(parking_chosen) do

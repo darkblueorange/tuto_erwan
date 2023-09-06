@@ -15,7 +15,10 @@ defmodule ErwanWeb.ParkingLive.Index do
        "options" => [{"Tous les parkings", "Tous les parkings"} | select_parking]
      })
      |> assign(:selected_parking, nil)
-     |> assign(:is_place_selected, true)
+     |> assign(:select_axis_display, %{
+       "place_axis_checkbox" => "true",
+       "availability_axis_checkbox" => "false"
+     })
      |> stream(:parkings, parking_list)}
   end
 
@@ -55,7 +58,11 @@ defmodule ErwanWeb.ParkingLive.Index do
     {:noreply, stream_delete(socket, :parkings, parking)}
   end
 
-  def handle_event("parking_selected", %{"parking_chosen" => parking_chosen}, socket) do
+  def handle_event(
+        "parking_selected",
+        %{"parking_chosen" => parking_chosen},
+        socket
+      ) do
     parking_data = Parkings.list_parkings(parking_chosen)
 
     {:noreply,
@@ -64,9 +71,17 @@ defmodule ErwanWeb.ParkingLive.Index do
      |> assign(:selected_parking, parking_chosen)}
   end
 
-  def handle_event("toggle_place", toggled, socket) do
+  def handle_event(
+        "axis_selected",
+        %{"place" => place, "taux d'occupation" => taux},
+        socket
+      ) do
     {:noreply,
      socket
-     |> assign(:is_place_selected, toggled)}
+     |> assign(:select_axis_display, %{
+       "place_axis_checkbox" => place,
+       "availability_axis_checkbox" => taux
+     })
+     |> assign(:selected_parking, socket.assigns.selected_parking)}
   end
 end

@@ -1,4 +1,7 @@
-Visu data parking live :<br /><br />
+<.header>
+  Sélectionnez un parking dans la liste déroulante pour disposer du graphique d'évolution des places :
+</.header>
+<br /><br />
 
 <.form for={@select_parking} phx-change="parking_selected">
   <.input
@@ -7,30 +10,39 @@ Visu data parking live :<br /><br />
     id="parking-list-select-id"
     name="parking_chosen"
     prompt="Sélectionnez un parking"
-    value=""
+    value={@selected_parking}
     options={@select_parking}
   >
   </.input>
 </.form>
-
 <br /><br />
 <%= if (@selected_parking != nil) do %>
-  <.input
-    type="checkbox"
-    label="places"
-    name="place_chosen"
-    value="true"
-    checked={@is_place_selected}
-    phx-click="toggle_place"
-  >
-  </.input>
-  <br />
-  <.live_component
-    module={ErwanWeb.Live.VegaGraph}
-    id="vega"
-    selected_parking={@selected_parking}
-  />
+  <.form for={@select_axis_display} phx-change="axis_selected">
+    afficher axe des places: <%= Phoenix.HTML.Form.checkbox(:place_axis, "place_axis_checkbox",
+      name: "place",
+      checked_value: "true",
+      unchecked_value: "false",
+      value: @select_axis_display["place_axis_checkbox"]
+    ) %>
+    <br />afficher taux d'occupation: <%= Phoenix.HTML.Form.checkbox(
+      :availability_axis,
+      "availability_axis_checkbox",
+      name: "taux d'occupation",
+      checked_value: "true",
+      unchecked_value: "false",
+      value: @select_axis_display["availability_axis_checkbox"]
+    ) %>
+    <br />
+    <.live_component
+      module={ErwanWeb.Live.VegaGraph}
+      id="vega"
+      selected_parking={@selected_parking}
+      select_axis_display={@select_axis_display}
+    />
+  </.form>
 <% end %>
+<br /><br />
+<br /><br />
 
 <.header>
   Listing Parkings
