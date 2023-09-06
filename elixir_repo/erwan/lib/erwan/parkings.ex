@@ -48,7 +48,8 @@ defmodule Erwan.Parkings do
     |> select([p], %{
       places: p.places,
       taux_doccupation: p.taux_doccupation,
-      derniere_mise_a_jour_base: p.derniere_mise_a_jour_base
+      # derniere_mise_a_jour_base: p.derniere_mise_a_jour_base
+      "Base temps réel": p.derniere_mise_a_jour_base
     })
     |> where([p], p.nom == ^parking_name)
     |> order_by([p], desc: p.derniere_actualisation_bo)
