@@ -22,6 +22,9 @@ Pour icônes SVG :
 http://svgicons.sparkk.fr/
 
 
+Insertion de VegaLite, notamment npm :
+https://github.com/filipecabaco/vegalite_demo
+
 Formattage dans VSCode : 
 https://abletech.nz/resource/how-to-configure-vs-code-to-format-elixir-code/
 https://pragmaticstudio.com/tutorials/formatting-heex-templates-in-vscode
