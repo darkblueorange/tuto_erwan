@@ -2,9 +2,9 @@ Visu data parking live :<br /><br />
 
 <.form for={@select_parking} phx-change="parking_selected">
   <.input
+    type="select"
     label="Liste des parkings"
     id="parking-list-select-id"
-    type="select"
     name="parking_chosen"
     prompt="Sélectionnez un parking"
     value=""
@@ -15,6 +15,16 @@ Visu data parking live :<br /><br />
 
 <br /><br />
 <%= if (@selected_parking != nil) do %>
+  <.input
+    type="checkbox"
+    label="places"
+    name="place_chosen"
+    value="true"
+    checked={@is_place_selected}
+    phx-click="toggle_place"
+  >
+  </.input>
+  <br />
   <.live_component
     module={ErwanWeb.Live.VegaGraph}
     id="vega"

@@ -15,6 +15,7 @@ defmodule ErwanWeb.ParkingLive.Index do
        "options" => [{"Tous les parkings", "Tous les parkings"} | select_parking]
      })
      |> assign(:selected_parking, nil)
+     |> assign(:is_place_selected, true)
      |> stream(:parkings, parking_list)}
   end
 
@@ -61,5 +62,11 @@ defmodule ErwanWeb.ParkingLive.Index do
      socket
      |> stream(:parkings, parking_data, reset: true)
      |> assign(:selected_parking, parking_chosen)}
+  end
+
+  def handle_event("toggle_place", toggled, socket) do
+    {:noreply,
+     socket
+     |> assign(:is_place_selected, toggled)}
   end
 end
