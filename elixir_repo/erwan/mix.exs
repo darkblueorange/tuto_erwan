@@ -4,7 +4,16 @@ defmodule Erwan.MixProject do
   def project do
     [
       app: :erwan,
+      name: "MSPR Machine Learning et BI - Adel SELIMI",
       version: "0.1.0",
+      source_url: "https://github.com/darkblueorange/tuto_erwan",
+      homepage_url: "http://localhost:4001",
+      docs: [
+        # The main page in the docs
+        main: "Documentation fonctions MSPR Machine Learning et BI - Adel",
+        logo: "path/to/logo.png",
+        extras: ["README.md"]
+      ],
       elixir: "~> 1.15.5",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
@@ -33,6 +42,7 @@ defmodule Erwan.MixProject do
   defp deps do
     [
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~>0.30.6"},
       {:ecto_sql, "~> 3.10"},
       {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
       {:finch, "~> 0.13"},
