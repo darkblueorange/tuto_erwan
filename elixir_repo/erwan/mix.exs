@@ -7,7 +7,7 @@ defmodule Erwan.MixProject do
       name: "MSPR Machine Learning et BI - Adel SELIMI",
       version: "0.1.0",
       source_url: "https://github.com/darkblueorange/tuto_erwan",
-      homepage_url: "http://localhost:4001",
+      homepage_url: "http://51.68.126.96:400",
       docs: [
         # The main page in the docs
         main: "Documentation fonctions MSPR Machine Learning et BI - Adel",
