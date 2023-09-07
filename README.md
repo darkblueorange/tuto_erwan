@@ -1,11 +1,11 @@
-# tuto_erwan
+# tuto_adel
 
 
-> mix phx.new erwan
+> mix phx.new adel
 
 #We are almost there! The following steps are missing:
 
-#    $ cd erwan
+#    $ cd adel
 
 #Then configure your database in config/dev.exs and run:
 
