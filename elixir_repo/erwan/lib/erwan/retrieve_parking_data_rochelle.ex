@@ -27,7 +27,7 @@ defmodule Erwan.RetrieveParkingDataRochelle do
 
   def send_as_loop() do
     Task.start(fn ->
-      Logger.info("[Rochelle] sending every 15 seconds a request")
+      Logger.info("[Rochelle] sending every 150 seconds a request")
       :timer.sleep(150_000)
 
       send_to()
