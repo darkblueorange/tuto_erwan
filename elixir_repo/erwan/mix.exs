@@ -4,7 +4,7 @@ defmodule Adel.MixProject do
   def project do
     [
       app: :adel,
-      name: "MSPR Machine Learning et BI - Adel SELIMI",
+      name: "MSPR Machine Learning et BI - Adel SEHIMI",
       version: "0.1.0",
       source_url: "https://github.com/darkblueorange/tuto_adel",
       homepage_url: "http://51.68.126.96:400",
