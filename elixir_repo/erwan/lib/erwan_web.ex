@@ -1,12 +1,12 @@
-defmodule ErwanWeb do
+defmodule AdelWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, components, channels, and so on.
 
   This can be used in your application as:
 
-      use ErwanWeb, :controller
-      use ErwanWeb, :html
+      use AdelWeb, :controller
+      use AdelWeb, :html
 
   The definitions below will be executed for every controller,
   component, etc, so keep them short and clean, focused
@@ -40,10 +40,10 @@ defmodule ErwanWeb do
     quote do
       use Phoenix.Controller,
         formats: [:html, :json],
-        layouts: [html: ErwanWeb.Layouts]
+        layouts: [html: AdelWeb.Layouts]
 
       import Plug.Conn
-      import ErwanWeb.Gettext
+      import AdelWeb.Gettext
 
       unquote(verified_routes())
     end
@@ -52,7 +52,7 @@ defmodule ErwanWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {ErwanWeb.Layouts, :app}
+        layout: {AdelWeb.Layouts, :app}
 
       unquote(html_helpers())
     end
@@ -84,8 +84,8 @@ defmodule ErwanWeb do
       # HTML escaping functionality
       import Phoenix.HTML
       # Core UI components and translation
-      import ErwanWeb.CoreComponents
-      import ErwanWeb.Gettext
+      import AdelWeb.CoreComponents
+      import AdelWeb.Gettext
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
@@ -98,9 +98,9 @@ defmodule ErwanWeb do
   def verified_routes do
     quote do
       use Phoenix.VerifiedRoutes,
-        endpoint: ErwanWeb.Endpoint,
-        router: ErwanWeb.Router,
-        statics: ErwanWeb.static_paths()
+        endpoint: AdelWeb.Endpoint,
+        router: AdelWeb.Router,
+        statics: AdelWeb.static_paths()
     end
   end
 

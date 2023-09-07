@@ -1,4 +1,4 @@
-defmodule Erwan.Repo.Migrations.CreateUtilisateurs do
+defmodule Adel.Repo.Migrations.CreateUtilisateurs do
   use Ecto.Migration
 
   def change do

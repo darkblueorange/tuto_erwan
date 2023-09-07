@@ -1,7 +1,7 @@
-defmodule ErwanWeb.ParkingRochelleLive.FormComponent do
-  use ErwanWeb, :live_component
+defmodule AdelWeb.ParkingRochelleLive.FormComponent do
+  use AdelWeb, :live_component
 
-  alias Erwan.Parkings
+  alias Adel.Parkings
 
   @impl true
   def render(assigns) do
@@ -78,7 +78,10 @@ defmodule ErwanWeb.ParkingRochelleLive.FormComponent do
   end
 
   defp save_parking_rochelle(socket, :edit, parking_rochelle_params) do
-    case Parkings.update_parking_rochelle(socket.assigns.parking_rochelle, parking_rochelle_params) do
+    case Parkings.update_parking_rochelle(
+           socket.assigns.parking_rochelle,
+           parking_rochelle_params
+         ) do
       {:ok, parking_rochelle} ->
         notify_parent({:saved, parking_rochelle})
 

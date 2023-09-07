@@ -1,7 +1,7 @@
-defmodule ErwanWeb.UtilisateursControllerTest do
-  use ErwanWeb.ConnCase
+defmodule AdelWeb.UtilisateursControllerTest do
+  use AdelWeb.ConnCase
 
-  import Erwan.SuperTrucsFixtures
+  import Adel.SuperTrucsFixtures
 
   @create_attrs %{prenom: "some prenom", nom: "some nom", age: 42}
   @update_attrs %{prenom: "some updated prenom", nom: "some updated nom", age: 43}

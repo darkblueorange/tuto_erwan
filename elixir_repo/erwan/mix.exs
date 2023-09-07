@@ -1,12 +1,12 @@
-defmodule Erwan.MixProject do
+defmodule Adel.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :erwan,
+      app: :adel,
       name: "MSPR Machine Learning et BI - Adel SELIMI",
       version: "0.1.0",
-      source_url: "https://github.com/darkblueorange/tuto_erwan",
+      source_url: "https://github.com/darkblueorange/tuto_adel",
       homepage_url: "http://51.68.126.96:400",
       docs: [
         # The main page in the docs
@@ -27,7 +27,7 @@ defmodule Erwan.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Erwan.Application, []},
+      mod: {Adel.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

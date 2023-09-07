@@ -2,7 +2,10 @@
   Parking rochelle <%= @parking_rochelle.id %>
   <:subtitle>This is a parking_rochelle record from your database.</:subtitle>
   <:actions>
-    <.link patch={~p"/rochelle_parkings/#{@parking_rochelle}/show/edit"} phx-click={JS.push_focus()}>
+    <.link
+      patch={~p"/rochelle_parkings/#{@parking_rochelle}/show/edit"}
+      phx-click={JS.push_focus()}
+    >
       <.button>Edit parking_rochelle</.button>
     </.link>
   </:actions>
@@ -27,7 +30,9 @@
   <:item title="Nb pmr"><%= @parking_rochelle.nb_pmr %></:item>
   <:item title="Coord y"><%= @parking_rochelle.coord_y %></:item>
   <:item title="Coord x"><%= @parking_rochelle.coord_x %></:item>
-  <:item title="Nb voitures electriques dispo"><%= @parking_rochelle.nb_voitures_electriques_dispo %></:item>
+  <:item title="Nb voitures electriques dispo">
+    <%= @parking_rochelle.nb_voitures_electriques_dispo %>
+  </:item>
   <:item title="Total count"><%= @parking_rochelle.total_count %></:item>
   <:item title="Full binary text"><%= @parking_rochelle.full_binary_text %></:item>
   <:item title="Nb pmr dispo"><%= @parking_rochelle.nb_pmr_dispo %></:item>
@@ -39,9 +44,14 @@
 
 <.back navigate={~p"/rochelle_parkings"}>Back to rochelle_parkings</.back>
 
-<.modal :if={@live_action == :edit} id="parking_rochelle-modal" show on_cancel={JS.patch(~p"/rochelle_parkings/#{@parking_rochelle}")}>
+<.modal
+  :if={@live_action == :edit}
+  id="parking_rochelle-modal"
+  show
+  on_cancel={JS.patch(~p"/rochelle_parkings/#{@parking_rochelle}")}
+>
   <.live_component
-    module={ErwanWeb.ParkingRochelleLive.FormComponent}
+    module={AdelWeb.ParkingRochelleLive.FormComponent}
     id={@parking_rochelle.id}
     title={@page_title}
     action={@live_action}

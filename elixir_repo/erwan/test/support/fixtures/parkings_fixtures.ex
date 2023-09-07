@@ -1,7 +1,7 @@
-defmodule Erwan.ParkingsFixtures do
+defmodule Adel.ParkingsFixtures do
   @moduledoc """
   This module defines test helpers for creating
-  entities via the `Erwan.Parkings` context.
+  entities via the `Adel.Parkings` context.
   """
 
   @doc """
@@ -20,7 +20,7 @@ defmodule Erwan.ParkingsFixtures do
         geo_point_2d: %{},
         parking_id: 42
       })
-      |> Erwan.Parkings.create_parking()
+      |> Adel.Parkings.create_parking()
 
     parking
   end
@@ -59,7 +59,7 @@ defmodule Erwan.ParkingsFixtures do
         nb_autopartage_dispo: 42,
         date_comptage: ~N[2023-09-05 23:03:00]
       })
-      |> Erwan.Parkings.create_parking_rochelle()
+      |> Adel.Parkings.create_parking_rochelle()
 
     parking_rochelle
   end

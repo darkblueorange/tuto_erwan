@@ -1,12 +1,12 @@
-defmodule Erwan.Parkings do
+defmodule Adel.Parkings do
   @moduledoc """
   The Parkings context.
   """
 
   import Ecto.Query, warn: false
-  alias Erwan.Repo
+  alias Adel.Repo
 
-  alias Erwan.Parkings.Parking
+  alias Adel.Parkings.Parking
 
   @doc """
   Returns the list of parkings.
@@ -160,7 +160,7 @@ defmodule Erwan.Parkings do
     Parking.changeset(parking, attrs)
   end
 
-  alias Erwan.Parkings.ParkingRochelle
+  alias Adel.Parkings.ParkingRochelle
 
   @doc """
   Returns the list of rochelle_parkings.

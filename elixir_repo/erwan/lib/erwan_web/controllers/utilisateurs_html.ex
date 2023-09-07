@@ -1,5 +1,5 @@
-defmodule ErwanWeb.UtilisateursHTML do
-  use ErwanWeb, :html
+defmodule AdelWeb.UtilisateursHTML do
+  use AdelWeb, :html
 
   embed_templates "utilisateurs_html/*"
 

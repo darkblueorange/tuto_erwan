@@ -1,4 +1,4 @@
-defmodule Erwan.Parkings.Parking do
+defmodule Adel.Parkings.Parking do
   @moduledoc """
   Parking Poitiers Ecto schema.
 

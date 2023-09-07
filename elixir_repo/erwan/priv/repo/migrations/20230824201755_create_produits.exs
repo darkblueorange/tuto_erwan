@@ -1,4 +1,4 @@
-defmodule Erwan.Repo.Migrations.CreateProduits do
+defmodule Adel.Repo.Migrations.CreateProduits do
   use Ecto.Migration
 
   def change do

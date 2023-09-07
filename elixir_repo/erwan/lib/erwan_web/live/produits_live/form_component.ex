@@ -1,7 +1,7 @@
-defmodule ErwanWeb.ProduitsLive.FormComponent do
-  use ErwanWeb, :live_component
+defmodule AdelWeb.ProduitsLive.FormComponent do
+  use AdelWeb, :live_component
 
-  alias Erwan.SuperTrucs
+  alias Adel.SuperTrucs
 
   @impl true
   def render(assigns) do

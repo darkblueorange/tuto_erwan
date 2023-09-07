@@ -1,8 +1,8 @@
-defmodule ErwanWeb.Layouts do
+defmodule AdelWeb.Layouts do
   @moduledoc """
   Native Layouts module.
   """
-  use ErwanWeb, :html
+  use AdelWeb, :html
 
   embed_templates "layouts/*"
 end

@@ -1,7 +1,7 @@
-defmodule Erwan.SuperTrucsFixtures do
+defmodule Adel.SuperTrucsFixtures do
   @moduledoc """
   This module defines test helpers for creating
-  entities via the `Erwan.SuperTrucs` context.
+  entities via the `Adel.SuperTrucs` context.
   """
 
   @doc """
@@ -15,7 +15,7 @@ defmodule Erwan.SuperTrucsFixtures do
         categorie: "some categorie",
         nombre: 42
       })
-      |> Erwan.SuperTrucs.create_produits()
+      |> Adel.SuperTrucs.create_produits()
 
     produits
   end
@@ -31,7 +31,7 @@ defmodule Erwan.SuperTrucsFixtures do
         nom: "some nom",
         age: 42
       })
-      |> Erwan.SuperTrucs.create_utilisateurs()
+      |> Adel.SuperTrucs.create_utilisateurs()
 
     utilisateurs
   end

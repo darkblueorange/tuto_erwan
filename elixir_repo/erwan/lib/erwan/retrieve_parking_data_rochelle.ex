@@ -1,4 +1,4 @@
-defmodule Erwan.RetrieveParkingDataRochelle do
+defmodule Adel.RetrieveParkingDataRochelle do
   @moduledoc """
 
   This module aimes to retrieve external Parking Data every second.
@@ -7,7 +7,7 @@ defmodule Erwan.RetrieveParkingDataRochelle do
   use GenServer
   require Logger
 
-  alias Erwan.Parkings
+  alias Adel.Parkings
 
   def child_spec(opts) do
     %{

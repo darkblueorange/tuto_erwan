@@ -1,4 +1,4 @@
-defmodule Erwan.SuperTrucs.Produits do
+defmodule Adel.SuperTrucs.Produits do
   @moduledoc """
   Produits Ecto schema.
   """

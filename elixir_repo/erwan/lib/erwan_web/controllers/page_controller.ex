@@ -1,5 +1,5 @@
-defmodule ErwanWeb.PageController do
-  use ErwanWeb, :controller
+defmodule AdelWeb.PageController do
+  use AdelWeb, :controller
 
   def home(conn, _params) do
     # The home page is often custom made,

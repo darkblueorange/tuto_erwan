@@ -1,4 +1,4 @@
-defmodule Erwan.Repo.Migrations.CreateParkings do
+defmodule Adel.Repo.Migrations.CreateParkings do
   use Ecto.Migration
 
   def change do

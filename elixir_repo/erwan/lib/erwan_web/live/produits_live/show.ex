@@ -1,7 +1,7 @@
-defmodule ErwanWeb.ProduitsLive.Show do
-  use ErwanWeb, :live_view
+defmodule AdelWeb.ProduitsLive.Show do
+  use AdelWeb, :live_view
 
-  alias Erwan.SuperTrucs
+  alias Adel.SuperTrucs
 
   @impl true
   def mount(_params, _session, socket) do

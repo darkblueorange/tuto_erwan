@@ -1,7 +1,7 @@
-defmodule ErwanWeb.ParkingLive.Show do
-  use ErwanWeb, :live_view
+defmodule AdelWeb.ParkingLive.Show do
+  use AdelWeb, :live_view
 
-  alias Erwan.Parkings
+  alias Adel.Parkings
 
   @impl true
   def mount(_params, _session, socket) do

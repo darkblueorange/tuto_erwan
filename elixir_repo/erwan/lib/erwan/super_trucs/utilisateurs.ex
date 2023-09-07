@@ -1,4 +1,4 @@
-defmodule Erwan.SuperTrucs.Utilisateurs do
+defmodule Adel.SuperTrucs.Utilisateurs do
   @moduledoc """
   Utilisateurs Ecto schema.
   """

@@ -1,5 +1,5 @@
-defmodule ErwanWeb.PageControllerTest do
-  use ErwanWeb.ConnCase
+defmodule AdelWeb.PageControllerTest do
+  use AdelWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")

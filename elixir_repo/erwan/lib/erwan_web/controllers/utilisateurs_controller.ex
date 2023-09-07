@@ -1,8 +1,8 @@
-defmodule ErwanWeb.UtilisateursController do
-  use ErwanWeb, :controller
+defmodule AdelWeb.UtilisateursController do
+  use AdelWeb, :controller
 
-  alias Erwan.SuperTrucs
-  alias Erwan.SuperTrucs.Utilisateurs
+  alias Adel.SuperTrucs
+  alias Adel.SuperTrucs.Utilisateurs
 
   def index(conn, _params) do
     utilisateurs =

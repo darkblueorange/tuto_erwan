@@ -1,8 +1,8 @@
-defmodule ErwanWeb.ProduitsLive.Index do
-  use ErwanWeb, :live_view
+defmodule AdelWeb.ProduitsLive.Index do
+  use AdelWeb, :live_view
 
-  alias Erwan.SuperTrucs
-  alias Erwan.SuperTrucs.Produits
+  alias Adel.SuperTrucs
+  alias Adel.SuperTrucs.Produits
 
   @impl true
   def mount(_params, _session, socket) do
@@ -33,7 +33,7 @@ defmodule ErwanWeb.ProduitsLive.Index do
   end
 
   @impl true
-  def handle_info({ErwanWeb.ProduitsLive.FormComponent, {:saved, produits}}, socket) do
+  def handle_info({AdelWeb.ProduitsLive.FormComponent, {:saved, produits}}, socket) do
     {:noreply, stream_insert(socket, :produits_collection, produits)}
   end
 

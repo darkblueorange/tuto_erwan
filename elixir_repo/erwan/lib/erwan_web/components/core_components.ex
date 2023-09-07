@@ -1,4 +1,4 @@
-defmodule ErwanWeb.CoreComponents do
+defmodule AdelWeb.CoreComponents do
   @moduledoc """
   Provides core UI components.
 
@@ -17,7 +17,7 @@ defmodule ErwanWeb.CoreComponents do
   use Phoenix.Component
 
   alias Phoenix.LiveView.JS
-  import ErwanWeb.Gettext
+  import AdelWeb.Gettext
 
   @doc """
   Renders a modal.
@@ -638,9 +638,9 @@ defmodule ErwanWeb.CoreComponents do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(ErwanWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(AdelWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(ErwanWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(AdelWeb.Gettext, "errors", msg, opts)
     end
   end
 

@@ -1,8 +1,8 @@
-defmodule ErwanWeb.ParkingLiveTest do
-  use ErwanWeb.ConnCase
+defmodule AdelWeb.ParkingLiveTest do
+  use AdelWeb.ConnCase
 
   import Phoenix.LiveViewTest
-  import Erwan.ParkingsFixtures
+  import Adel.ParkingsFixtures
 
   @create_attrs %{
     nom: "some nom",

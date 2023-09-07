@@ -1,6 +1,6 @@
-defmodule Erwan.Mailer do
+defmodule Adel.Mailer do
   @moduledoc """
   Native Mailer module.
   """
-  use Swoosh.Mailer, otp_app: :erwan
+  use Swoosh.Mailer, otp_app: :adel
 end

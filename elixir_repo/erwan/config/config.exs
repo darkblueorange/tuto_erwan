@@ -7,17 +7,17 @@
 # General application configuration
 import Config
 
-config :erwan,
-  ecto_repos: [Erwan.Repo]
+config :adel,
+  ecto_repos: [Adel.Repo]
 
 # Configures the endpoint
-config :erwan, ErwanWeb.Endpoint,
+config :adel, AdelWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [
-    formats: [html: ErwanWeb.ErrorHTML, json: ErwanWeb.ErrorJSON],
+    formats: [html: AdelWeb.ErrorHTML, json: AdelWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: Erwan.PubSub,
+  pubsub_server: Adel.PubSub,
   live_view: [signing_salt: "GUIB2L/4"]
 
 # Configures the mailer
@@ -27,7 +27,7 @@ config :erwan, ErwanWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :erwan, Erwan.Mailer, adapter: Swoosh.Adapters.Local
+config :adel, Adel.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,

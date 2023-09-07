@@ -1,12 +1,12 @@
-defmodule Erwan.SuperTrucs do
+defmodule Adel.SuperTrucs do
   @moduledoc """
   The SuperTrucs context.
   """
 
   import Ecto.Query, warn: false
-  alias Erwan.Repo
+  alias Adel.Repo
 
-  alias Erwan.SuperTrucs.Produits
+  alias Adel.SuperTrucs.Produits
 
   @doc """
   Returns the list of produits.
@@ -102,7 +102,7 @@ defmodule Erwan.SuperTrucs do
     Produits.changeset(produits, attrs)
   end
 
-  alias Erwan.SuperTrucs.Utilisateurs
+  alias Adel.SuperTrucs.Utilisateurs
 
   @doc """
   Returns the list of utilisateurs.

@@ -1,8 +1,8 @@
-defmodule ErwanWeb.ParkingLive.Index do
-  use ErwanWeb, :live_view
+defmodule AdelWeb.ParkingLive.Index do
+  use AdelWeb, :live_view
 
-  alias Erwan.Parkings
-  alias Erwan.Parkings.Parking
+  alias Adel.Parkings
+  alias Adel.Parkings.Parking
 
   @impl true
   def mount(_params, _session, socket) do
@@ -47,7 +47,7 @@ defmodule ErwanWeb.ParkingLive.Index do
   end
 
   @impl true
-  def handle_info({ErwanWeb.ParkingLive.FormComponent, {:saved, parking}}, socket) do
+  def handle_info({AdelWeb.ParkingLive.FormComponent, {:saved, parking}}, socket) do
     {:noreply, stream_insert(socket, :parkings, parking)}
   end
 

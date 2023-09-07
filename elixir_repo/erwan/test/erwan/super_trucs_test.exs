@@ -1,12 +1,12 @@
-defmodule Erwan.SuperTrucsTest do
-  use Erwan.DataCase
+defmodule Adel.SuperTrucsTest do
+  use Adel.DataCase
 
-  alias Erwan.SuperTrucs
+  alias Adel.SuperTrucs
 
   describe "produits" do
-    alias Erwan.SuperTrucs.Produits
+    alias Adel.SuperTrucs.Produits
 
-    import Erwan.SuperTrucsFixtures
+    import Adel.SuperTrucsFixtures
 
     @invalid_attrs %{nom: nil, categorie: nil, nombre: nil}
 
@@ -62,9 +62,9 @@ defmodule Erwan.SuperTrucsTest do
   end
 
   describe "utilisateurs" do
-    alias Erwan.SuperTrucs.Utilisateurs
+    alias Adel.SuperTrucs.Utilisateurs
 
-    import Erwan.SuperTrucsFixtures
+    import Adel.SuperTrucsFixtures
 
     @invalid_attrs %{prenom: nil, nom: nil, age: nil}
 

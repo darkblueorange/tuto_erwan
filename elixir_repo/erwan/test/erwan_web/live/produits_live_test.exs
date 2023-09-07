@@ -1,8 +1,8 @@
-defmodule ErwanWeb.ProduitsLiveTest do
-  use ErwanWeb.ConnCase
+defmodule AdelWeb.ProduitsLiveTest do
+  use AdelWeb.ConnCase
 
   import Phoenix.LiveViewTest
-  import Erwan.SuperTrucsFixtures
+  import Adel.SuperTrucsFixtures
 
   @create_attrs %{nom: "some nom", categorie: "some categorie", nombre: 42}
   @update_attrs %{nom: "some updated nom", categorie: "some updated categorie", nombre: 43}

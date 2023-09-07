@@ -1,7 +1,7 @@
-defmodule ErwanWeb.ParkingLive.FormComponent do
-  use ErwanWeb, :live_component
+defmodule AdelWeb.ParkingLive.FormComponent do
+  use AdelWeb, :live_component
 
-  alias Erwan.Parkings
+  alias Adel.Parkings
 
   @impl true
   def render(assigns) do

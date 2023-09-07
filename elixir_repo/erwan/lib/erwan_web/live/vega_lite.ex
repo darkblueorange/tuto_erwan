@@ -1,16 +1,16 @@
-defmodule ErwanWeb.Live.VegaGraph do
+defmodule AdelWeb.Live.VegaGraph do
   @moduledoc """
-  ErwanWeb.Live.VegaGraph is Vega Implementation as a live_component
+  AdelWeb.Live.VegaGraph is Vega Implementation as a live_component
   To add it to another live, just add these lines in the .heex :
     <.live_component
-      module={ErwanWeb.Live.VegaGraph}
+      module={AdelWeb.Live.VegaGraph}
       id="vega"
       selected_parking={@selected_parking}
     />
   """
-  use ErwanWeb, :live_component
+  use AdelWeb, :live_component
   alias VegaLite
-  alias Erwan.Parkings
+  alias Adel.Parkings
 
   require Logger
 

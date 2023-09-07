@@ -1,8 +1,8 @@
-defmodule ErwanWeb.ParkingRochelleLive.Index do
-  use ErwanWeb, :live_view
+defmodule AdelWeb.ParkingRochelleLive.Index do
+  use AdelWeb, :live_view
 
-  alias Erwan.Parkings
-  alias Erwan.Parkings.ParkingRochelle
+  alias Adel.Parkings
+  alias Adel.Parkings.ParkingRochelle
 
   @impl true
   def mount(_params, _session, socket) do
@@ -50,7 +50,7 @@ defmodule ErwanWeb.ParkingRochelleLive.Index do
 
   @impl true
   def handle_info(
-        {ErwanWeb.ParkingRochelleLive.FormComponent, {:saved, parking_rochelle}},
+        {AdelWeb.ParkingRochelleLive.FormComponent, {:saved, parking_rochelle}},
         socket
       ) do
     {:noreply, stream_insert(socket, :rochelle_parkings, parking_rochelle)}

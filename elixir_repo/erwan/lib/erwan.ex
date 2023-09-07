@@ -1,6 +1,6 @@
-defmodule Erwan do
+defmodule Adel do
   @moduledoc """
-  Erwan keeps the contexts that define your domain
+  Adel keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

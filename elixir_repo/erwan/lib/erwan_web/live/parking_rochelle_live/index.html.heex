@@ -34,7 +34,7 @@
     ) %>
     <br />
     <.live_component
-      module={ErwanWeb.Live.VegaGraph}
+      module={AdelWeb.Live.VegaGraph}
       id="vega"
       selected_parking={@selected_parking}
       select_axis_display={@select_axis_display}
@@ -140,7 +140,7 @@
   on_cancel={JS.patch(~p"/rochelle_parkings")}
 >
   <.live_component
-    module={ErwanWeb.ParkingRochelleLive.FormComponent}
+    module={AdelWeb.ParkingRochelleLive.FormComponent}
     id={@parking_rochelle.id || :new}
     title={@page_title}
     action={@live_action}

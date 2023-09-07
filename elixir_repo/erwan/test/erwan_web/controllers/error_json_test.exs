@@ -1,12 +1,12 @@
-defmodule ErwanWeb.ErrorJSONTest do
-  use ErwanWeb.ConnCase, async: true
+defmodule AdelWeb.ErrorJSONTest do
+  use AdelWeb.ConnCase, async: true
 
   test "renders 404" do
-    assert ErwanWeb.ErrorJSON.render("404.json", %{}) == %{errors: %{detail: "Not Found"}}
+    assert AdelWeb.ErrorJSON.render("404.json", %{}) == %{errors: %{detail: "Not Found"}}
   end
 
   test "renders 500" do
-    assert ErwanWeb.ErrorJSON.render("500.json", %{}) ==
+    assert AdelWeb.ErrorJSON.render("500.json", %{}) ==
              %{errors: %{detail: "Internal Server Error"}}
   end
 end
