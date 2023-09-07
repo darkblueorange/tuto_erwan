@@ -24,7 +24,7 @@ defmodule ErwanWeb.Live.VegaGraph do
         padding: 5
       )
       # Load values. Values are a map with the attributes to be used by Vegalite
-      |> VegaLite.data_from_values(real_data(assigns.selected_parking))
+      |> VegaLite.data_from_values(real_data(assigns.selected_parking, assigns.module_name))
       |> VegaLite.encode_field(:x, "Base temps réel",
         type: :temporal,
         axis: %{tick_count: 25}
@@ -106,8 +106,16 @@ defmodule ErwanWeb.Live.VegaGraph do
     |> VegaLite.encode_field(:color, "no data selected !", type: :nominal)
   end
 
-  defp real_data(parking_chosen) do
-    parking_chosen
-    |> Parkings.list_parkings_vega()
+  defp real_data(parking_chosen, module_name) do
+    module_name
+    |> case do
+      "Poitiers" ->
+        parking_chosen
+        |> Parkings.list_parkings_vega()
+
+      "Rochelle" ->
+        parking_chosen
+        |> Parkings.list_rochelle_parkings_vega()
+    end
   end
 end

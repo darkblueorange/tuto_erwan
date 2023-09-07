@@ -1,6 +1,6 @@
 defmodule Erwan.Parkings.Parking do
   @moduledoc """
-  Parking Ecto schema.
+  Parking Poitiers Ecto schema.
 
   field :geo_point_2d, :map is still to be dealt correctly from HTML but not only.
   """

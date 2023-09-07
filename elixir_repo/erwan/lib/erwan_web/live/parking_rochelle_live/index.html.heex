@@ -1,0 +1,150 @@
+<.header>
+  Sélectionnez un parking dans la liste déroulante pour disposer du graphique d'évolution des places :
+</.header>
+<br /><br />
+
+<.form for={@select_parking} phx-change="parking_selected">
+  <.input
+    type="select"
+    label="Liste des parkings"
+    id="parking-list-select-id"
+    name="parking_chosen"
+    prompt="Sélectionnez un parking"
+    value={@selected_parking}
+    options={@select_parking}
+  >
+  </.input>
+</.form>
+<br /><br />
+<%= if (@selected_parking != nil) do %>
+  <.form for={@select_axis_display} phx-change="axis_selected">
+    afficher axe des places: <%= Phoenix.HTML.Form.checkbox(:place_axis, "place_axis_checkbox",
+      name: "place",
+      checked_value: "true",
+      unchecked_value: "false",
+      value: @select_axis_display["place_axis_checkbox"]
+    ) %>
+    <br />afficher taux d'occupation: <%= Phoenix.HTML.Form.checkbox(
+      :availability_axis,
+      "availability_axis_checkbox",
+      name: "taux d'occupation",
+      checked_value: "true",
+      unchecked_value: "false",
+      value: @select_axis_display["availability_axis_checkbox"]
+    ) %>
+    <br />
+    <.live_component
+      module={ErwanWeb.Live.VegaGraph}
+      id="vega"
+      selected_parking={@selected_parking}
+      select_axis_display={@select_axis_display}
+      module_name={@module_name}
+    />
+  </.form>
+<% end %>
+<br /><br />
+<br /><br />
+<span><.link navigate={~p"/"}>Retour Accueil</.link></span>
+<br />
+
+<.header>
+  Listing Rochelle parkings
+  <:actions>
+    <.link patch={~p"/rochelle_parkings/new"}>
+      <.button>New Parking rochelle</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="rochelle_parkings"
+  rows={@streams.rochelle_parkings}
+  row_click={
+    fn {_id, parking_rochelle} -> JS.navigate(~p"/rochelle_parkings/#{parking_rochelle}") end
+  }
+>
+  <:col :let={{_id, parking_rochelle}} label="Nb places"><%= parking_rochelle.nb_places %></:col>
+  <:col :let={{_id, parking_rochelle}} label="Nb autopartage">
+    <%= parking_rochelle.nb_autopartage %>
+  </:col>
+  <:col :let={{_id, parking_rochelle}} label="Nb velo"><%= parking_rochelle.nb_velo %></:col>
+  <:col :let={{_id, parking_rochelle}} label="Nb velo dispo">
+    <%= parking_rochelle.nb_velo_dispo %>
+  </:col>
+  <:col :let={{_id, parking_rochelle}} label="Nb 2r el dispo">
+    <%= parking_rochelle.nb_2r_el_dispo %>
+  </:col>
+  <:col :let={{_id, parking_rochelle}} label="Parking string">
+    <%= parking_rochelle.parking_string_id %>
+  </:col>
+  <:col :let={{_id, parking_rochelle}} label="Ylat"><%= parking_rochelle.ylat %></:col>
+  <:col :let={{_id, parking_rochelle}} label="Nb 2 rm"><%= parking_rochelle.nb_2_rm %></:col>
+  <:col :let={{_id, parking_rochelle}} label="Nb 2 rm dispo">
+    <%= parking_rochelle.nb_2_rm_dispo %>
+  </:col>
+  <:col :let={{_id, parking_rochelle}} label="Nb 2r el"><%= parking_rochelle.nb_2r_el %></:col>
+  <:col :let={{_id, parking_rochelle}} label="Xlong"><%= parking_rochelle.xlong %></:col>
+  <:col :let={{_id, parking_rochelle}} label="Nom"><%= parking_rochelle.nom %></:col>
+  <:col :let={{_id, parking_rochelle}} label="Nb voitures electriques">
+    <%= parking_rochelle.nb_voitures_electriques %>
+  </:col>
+  <:col :let={{_id, parking_rochelle}} label="Nb places disponibles">
+    <%= parking_rochelle.nb_places_disponibles %>
+  </:col>
+  <:col :let={{_id, parking_rochelle}} label="Nb pr dispo">
+    <%= parking_rochelle.nb_pr_dispo %>
+  </:col>
+  <:col :let={{_id, parking_rochelle}} label="Nb pmr"><%= parking_rochelle.nb_pmr %></:col>
+  <:col :let={{_id, parking_rochelle}} label="Coord y"><%= parking_rochelle.coord_y %></:col>
+  <:col :let={{_id, parking_rochelle}} label="Coord x"><%= parking_rochelle.coord_x %></:col>
+  <:col :let={{_id, parking_rochelle}} label="Nb voitures electriques dispo">
+    <%= parking_rochelle.nb_voitures_electriques_dispo %>
+  </:col>
+  <:col :let={{_id, parking_rochelle}} label="Total count">
+    <%= parking_rochelle.total_count %>
+  </:col>
+  <:col :let={{_id, parking_rochelle}} label="Full binary text">
+    <%= parking_rochelle.full_binary_text %>
+  </:col>
+  <:col :let={{_id, parking_rochelle}} label="Nb pmr dispo">
+    <%= parking_rochelle.nb_pmr_dispo %>
+  </:col>
+  <:col :let={{_id, parking_rochelle}} label="Nb pr"><%= parking_rochelle.nb_pr %></:col>
+  <:col :let={{_id, parking_rochelle}} label="Other"><%= parking_rochelle.other_id %></:col>
+  <:col :let={{_id, parking_rochelle}} label="Nb autopartage dispo">
+    <%= parking_rochelle.nb_autopartage_dispo %>
+  </:col>
+  <:col :let={{_id, parking_rochelle}} label="Date comptage">
+    <%= parking_rochelle.date_comptage %>
+  </:col>
+  <:action :let={{_id, parking_rochelle}}>
+    <div class="sr-only">
+      <.link navigate={~p"/rochelle_parkings/#{parking_rochelle}"}>Show</.link>
+    </div>
+    <.link patch={~p"/rochelle_parkings/#{parking_rochelle}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, parking_rochelle}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: parking_rochelle.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="parking_rochelle-modal"
+  show
+  on_cancel={JS.patch(~p"/rochelle_parkings")}
+>
+  <.live_component
+    module={ErwanWeb.ParkingRochelleLive.FormComponent}
+    id={@parking_rochelle.id || :new}
+    title={@page_title}
+    action={@live_action}
+    parking_rochelle={@parking_rochelle}
+    patch={~p"/rochelle_parkings"}
+  />
+</.modal>

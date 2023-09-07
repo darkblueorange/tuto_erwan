@@ -1,0 +1,51 @@
+<.header>
+  Parking rochelle <%= @parking_rochelle.id %>
+  <:subtitle>This is a parking_rochelle record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/rochelle_parkings/#{@parking_rochelle}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit parking_rochelle</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Nb places"><%= @parking_rochelle.nb_places %></:item>
+  <:item title="Nb autopartage"><%= @parking_rochelle.nb_autopartage %></:item>
+  <:item title="Nb velo"><%= @parking_rochelle.nb_velo %></:item>
+  <:item title="Nb velo dispo"><%= @parking_rochelle.nb_velo_dispo %></:item>
+  <:item title="Nb 2r el dispo"><%= @parking_rochelle.nb_2r_el_dispo %></:item>
+  <:item title="Parking string"><%= @parking_rochelle.parking_string_id %></:item>
+  <:item title="Ylat"><%= @parking_rochelle.ylat %></:item>
+  <:item title="Nb 2 rm"><%= @parking_rochelle.nb_2_rm %></:item>
+  <:item title="Nb 2 rm dispo"><%= @parking_rochelle.nb_2_rm_dispo %></:item>
+  <:item title="Nb 2r el"><%= @parking_rochelle.nb_2r_el %></:item>
+  <:item title="Xlong"><%= @parking_rochelle.xlong %></:item>
+  <:item title="Nom"><%= @parking_rochelle.nom %></:item>
+  <:item title="Nb voitures electriques"><%= @parking_rochelle.nb_voitures_electriques %></:item>
+  <:item title="Nb places disponibles"><%= @parking_rochelle.nb_places_disponibles %></:item>
+  <:item title="Nb pr dispo"><%= @parking_rochelle.nb_pr_dispo %></:item>
+  <:item title="Nb pmr"><%= @parking_rochelle.nb_pmr %></:item>
+  <:item title="Coord y"><%= @parking_rochelle.coord_y %></:item>
+  <:item title="Coord x"><%= @parking_rochelle.coord_x %></:item>
+  <:item title="Nb voitures electriques dispo"><%= @parking_rochelle.nb_voitures_electriques_dispo %></:item>
+  <:item title="Total count"><%= @parking_rochelle.total_count %></:item>
+  <:item title="Full binary text"><%= @parking_rochelle.full_binary_text %></:item>
+  <:item title="Nb pmr dispo"><%= @parking_rochelle.nb_pmr_dispo %></:item>
+  <:item title="Nb pr"><%= @parking_rochelle.nb_pr %></:item>
+  <:item title="Other"><%= @parking_rochelle.other_id %></:item>
+  <:item title="Nb autopartage dispo"><%= @parking_rochelle.nb_autopartage_dispo %></:item>
+  <:item title="Date comptage"><%= @parking_rochelle.date_comptage %></:item>
+</.list>
+
+<.back navigate={~p"/rochelle_parkings"}>Back to rochelle_parkings</.back>
+
+<.modal :if={@live_action == :edit} id="parking_rochelle-modal" show on_cancel={JS.patch(~p"/rochelle_parkings/#{@parking_rochelle}")}>
+  <.live_component
+    module={ErwanWeb.ParkingRochelleLive.FormComponent}
+    id={@parking_rochelle.id}
+    title={@page_title}
+    action={@live_action}
+    parking_rochelle={@parking_rochelle}
+    patch={~p"/rochelle_parkings/#{@parking_rochelle}"}
+  />
+</.modal>

@@ -1,4 +1,4 @@
-defmodule Erwan.RetrieveParkingData do
+defmodule Erwan.RetrieveParkingDataRochelle do
   @moduledoc """
 
   This module aimes to retrieve external Parking Data every second.
@@ -7,7 +7,6 @@ defmodule Erwan.RetrieveParkingData do
   use GenServer
   require Logger
 
-  # alias Erwan.Repo
   alias Erwan.Parkings
 
   def child_spec(opts) do
@@ -21,20 +20,20 @@ defmodule Erwan.RetrieveParkingData do
     do: GenServer.start_link(__MODULE__, opts)
 
   def init(_opts) do
-    Logger.info("***** RetrieveParkingData INIT *****")
+    Logger.info("***** RetrieveParkingDataRochelle INIT *****")
 
     send_as_loop()
   end
 
   def send_as_loop() do
     Task.start(fn ->
-      Logger.info("sending every 150 seconds a request")
+      Logger.info("[Rochelle] sending every 15 seconds a request")
       :timer.sleep(150_000)
 
       send_to()
       |> case do
         {:ok, result} ->
-          result["results"]
+          result["records"]
           |> data_decode()
 
           send_as_loop()
@@ -52,7 +51,7 @@ defmodule Erwan.RetrieveParkingData do
 
   def send_to() do
     url =
-      "https://data.grandpoitiers.fr/api/explore/v2.1/catalog/datasets/mobilites-stationnement-des-parkings-en-temps-reel/records"
+      "https://api.agglo-larochelle.fr/production/opendata/api/records/1.0/search/dataset=parking___places_disponibles_en_temps_reel"
 
     headers = [{"Content-Type", "application/json"}]
 
@@ -88,26 +87,20 @@ defmodule Erwan.RetrieveParkingData do
 
   def data_decode(data) do
     data
-    # |> Repo.
-
     |> Enum.reduce([], fn
       %{
-        "id" => parking_id,
-        "nom" => _parking_name,
-        "places" => _free_places,
-        "capacite" => _total_nb_places,
-        "derniere_mise_a_jour_base" => _datetime_ping_db,
-        "derniere_actualisation_bo" => _datetime_ping_real,
-        "taux_doccupation" => _occupancy_rate,
-        "geo_point_2d" => _geopoint
-      } = result,
+        "datasetid" => "parking___places_disponibles_en_temps_reel",
+        "recordid" => _recordid,
+        "fields" =>
+          %{"id" => parking_string_id, "_id" => other_id, "_full_text" => full_binary_text} =
+              fields
+      },
       _acc1 ->
-        # geopoint can be %{ "lon" => _longitude, "lat" => _latitude } or nil
-        # Logger.info("Result catched : #{inspect(result)}")
-
-        result
-        |> Map.put("parking_id", parking_id)
-        |> Parkings.create_parking()
+        fields
+        |> Map.put("parking_string_id", parking_string_id)
+        |> Map.put("other_id", other_id)
+        |> Map.put("full_binary_text", full_binary_text)
+        |> Parkings.create_parking_rochelle()
 
       result, acc1 ->
         # Ignore

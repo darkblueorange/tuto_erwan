@@ -43,12 +43,22 @@ defmodule Erwan.Parkings do
     |> Repo.all()
   end
 
+  def list_parkings_vega("Tous les parkings") do
+    Parking
+    |> select([p], %{
+      places: p.places,
+      taux_doccupation: p.taux_doccupation,
+      "Base temps réel": p.derniere_mise_a_jour_base
+    })
+    |> order_by([p], desc: p.derniere_actualisation_bo)
+    |> Repo.all()
+  end
+
   def list_parkings_vega(parking_name) when parking_name |> is_binary() do
     Parking
     |> select([p], %{
       places: p.places,
       taux_doccupation: p.taux_doccupation,
-      # derniere_mise_a_jour_base: p.derniere_mise_a_jour_base
       "Base temps réel": p.derniere_mise_a_jour_base
     })
     |> where([p], p.nom == ^parking_name)
@@ -148,5 +158,144 @@ defmodule Erwan.Parkings do
   """
   def change_parking(%Parking{} = parking, attrs \\ %{}) do
     Parking.changeset(parking, attrs)
+  end
+
+  alias Erwan.Parkings.ParkingRochelle
+
+  @doc """
+  Returns the list of rochelle_parkings.
+
+  ## Examples
+
+      iex> list_rochelle_parkings()
+      [%ParkingRochelle{}, ...]
+
+  """
+  def list_rochelle_parkings do
+    Repo.all(ParkingRochelle)
+  end
+
+  def list_rochelle_parkings_reduced() do
+    ParkingRochelle
+    |> select([p], {p.nom, p.nom})
+    |> distinct(true)
+    |> Repo.all()
+  end
+
+  def list_rochelle_parkings("Tous les parkings") do
+    ParkingRochelle
+    |> order_by([p], desc: p.date_comptage)
+    |> Repo.all()
+  end
+
+  def list_rochelle_parkings(parking_name) when parking_name |> is_binary() do
+    ParkingRochelle
+    |> where([p], p.nom == ^parking_name)
+    |> order_by([p], desc: p.date_comptage)
+    |> Repo.all()
+  end
+
+  def list_rochelle_parkings_vega("Tous les parkings") do
+    ParkingRochelle
+    |> select([p], %{
+      places: p.nb_places_disponibles,
+      taux_doccupation: 100.0 * p.nb_places_disponibles / p.nb_places,
+      "Base temps réel": p.date_comptage
+    })
+    |> order_by([p], desc: p.date_comptage)
+    |> Repo.all()
+  end
+
+  def list_rochelle_parkings_vega(parking_name) when parking_name |> is_binary() do
+    ParkingRochelle
+    |> select([p], %{
+      places: p.nb_places_disponibles,
+      taux_doccupation: 100.0 * p.nb_places_disponibles / p.nb_places,
+      "Base temps réel": p.date_comptage
+    })
+    |> where([p], p.nom == ^parking_name)
+    |> order_by([p], desc: p.date_comptage)
+    |> Repo.all()
+  end
+
+  @doc """
+  Gets a single parking_rochelle.
+
+  Raises `Ecto.NoResultsError` if the Parking rochelle does not exist.
+
+  ## Examples
+
+      iex> get_parking_rochelle!(123)
+      %ParkingRochelle{}
+
+      iex> get_parking_rochelle!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_parking_rochelle!(id), do: Repo.get!(ParkingRochelle, id)
+
+  @doc """
+  Creates a parking_rochelle.
+
+  ## Examples
+
+      iex> create_parking_rochelle(%{field: value})
+      {:ok, %ParkingRochelle{}}
+
+      iex> create_parking_rochelle(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_parking_rochelle(attrs \\ %{}) do
+    %ParkingRochelle{}
+    |> ParkingRochelle.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a parking_rochelle.
+
+  ## Examples
+
+      iex> update_parking_rochelle(parking_rochelle, %{field: new_value})
+      {:ok, %ParkingRochelle{}}
+
+      iex> update_parking_rochelle(parking_rochelle, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_parking_rochelle(%ParkingRochelle{} = parking_rochelle, attrs) do
+    parking_rochelle
+    |> ParkingRochelle.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a parking_rochelle.
+
+  ## Examples
+
+      iex> delete_parking_rochelle(parking_rochelle)
+      {:ok, %ParkingRochelle{}}
+
+      iex> delete_parking_rochelle(parking_rochelle)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_parking_rochelle(%ParkingRochelle{} = parking_rochelle) do
+    Repo.delete(parking_rochelle)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking parking_rochelle changes.
+
+  ## Examples
+
+      iex> change_parking_rochelle(parking_rochelle)
+      %Ecto.Changeset{data: %ParkingRochelle{}}
+
+  """
+  def change_parking_rochelle(%ParkingRochelle{} = parking_rochelle, attrs \\ %{}) do
+    ParkingRochelle.changeset(parking_rochelle, attrs)
   end
 end

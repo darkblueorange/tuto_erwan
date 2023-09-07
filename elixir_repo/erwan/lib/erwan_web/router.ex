@@ -25,7 +25,6 @@ defmodule ErwanWeb.Router do
     live "/produits/:id", ProduitsLive.Show, :show
     live "/produits/:id/show/edit", ProduitsLive.Show, :edit
 
-    # get "/utilisateurs", UtilisateursController, :index
     resources "/utilisateurs", UtilisateursController
 
     live "/parkings", ParkingLive.Index, :index
@@ -34,6 +33,13 @@ defmodule ErwanWeb.Router do
 
     live "/parkings/:id", ParkingLive.Show, :show
     live "/parkings/:id/show/edit", ParkingLive.Show, :edit
+
+    live "/rochelle_parkings", ParkingRochelleLive.Index, :index
+    live "/rochelle_parkings/new", ParkingRochelleLive.Index, :new
+    live "/rochelle_parkings/:id/edit", ParkingRochelleLive.Index, :edit
+
+    live "/rochelle_parkings/:id", ParkingRochelleLive.Show, :show
+    live "/rochelle_parkings/:id/show/edit", ParkingRochelleLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

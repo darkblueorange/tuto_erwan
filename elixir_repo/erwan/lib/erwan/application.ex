@@ -11,7 +11,8 @@ defmodule Erwan.Application do
       # Start the Telemetry supervisor
       ErwanWeb.Telemetry,
       # Ping the ParkingDataAPI
-      Erwan.RetrieveParkingData,
+      Erwan.RetrieveParkingDataPoitiers,
+      Erwan.RetrieveParkingDataRochelle,
       # Start the Ecto repository
       Erwan.Repo,
       # Start the PubSub system

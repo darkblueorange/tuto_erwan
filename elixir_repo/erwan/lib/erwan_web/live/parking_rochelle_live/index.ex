@@ -1,14 +1,16 @@
-defmodule ErwanWeb.ParkingLive.Index do
+defmodule ErwanWeb.ParkingRochelleLive.Index do
   use ErwanWeb, :live_view
 
   alias Erwan.Parkings
-  alias Erwan.Parkings.Parking
+  alias Erwan.Parkings.ParkingRochelle
 
   @impl true
   def mount(_params, _session, socket) do
-    parking_list = Parkings.list_parkings()
-    select_parking = Parkings.list_parkings_reduced()
+    parking_list = Parkings.list_rochelle_parkings()
+    select_parking = Parkings.list_rochelle_parkings_reduced()
 
+    #   {:ok, socket |> stream(:rochelle_parkings, parking_list)}
+    # end
     {:ok,
      socket
      |> assign(:select_parking, %{
@@ -19,8 +21,8 @@ defmodule ErwanWeb.ParkingLive.Index do
        "place_axis_checkbox" => "true",
        "availability_axis_checkbox" => "false"
      })
-     |> assign(:module_name, "Poitiers")
-     |> stream(:parkings, parking_list)}
+     |> assign(:module_name, "Rochelle")
+     |> stream(:rochelle_parkings, parking_list)}
   end
 
   @impl true
@@ -30,33 +32,36 @@ defmodule ErwanWeb.ParkingLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Parking")
-    |> assign(:parking, Parkings.get_parking!(id))
+    |> assign(:page_title, "Edit Parking rochelle")
+    |> assign(:parking_rochelle, Parkings.get_parking_rochelle!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Parking")
-    |> assign(:parking, %Parking{})
+    |> assign(:page_title, "New Parking rochelle")
+    |> assign(:parking_rochelle, %ParkingRochelle{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Parkings")
-    |> assign(:parking, nil)
+    |> assign(:page_title, "Listing Rochelle parkings")
+    |> assign(:parking_rochelle, nil)
   end
 
   @impl true
-  def handle_info({ErwanWeb.ParkingLive.FormComponent, {:saved, parking}}, socket) do
-    {:noreply, stream_insert(socket, :parkings, parking)}
+  def handle_info(
+        {ErwanWeb.ParkingRochelleLive.FormComponent, {:saved, parking_rochelle}},
+        socket
+      ) do
+    {:noreply, stream_insert(socket, :rochelle_parkings, parking_rochelle)}
   end
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    parking = Parkings.get_parking!(id)
-    {:ok, _} = Parkings.delete_parking(parking)
+    parking_rochelle = Parkings.get_parking_rochelle!(id)
+    {:ok, _} = Parkings.delete_parking_rochelle(parking_rochelle)
 
-    {:noreply, stream_delete(socket, :parkings, parking)}
+    {:noreply, stream_delete(socket, :rochelle_parkings, parking_rochelle)}
   end
 
   def handle_event(
@@ -64,7 +69,7 @@ defmodule ErwanWeb.ParkingLive.Index do
         %{"parking_chosen" => parking_chosen},
         socket
       ) do
-    parking_data = Parkings.list_parkings(parking_chosen)
+    parking_data = Parkings.list_rochelle_parkings(parking_chosen)
 
     {:noreply,
      socket
