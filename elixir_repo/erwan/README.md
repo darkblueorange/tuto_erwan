@@ -31,3 +31,19 @@ https://pragmaticstudio.com/tutorials/formatting-heex-templates-in-vscode
 
 https://marketplace.visualstudio.com/items?itemName=phoenixframework.phoenix
 
+
+Lancement en mode détaché : 
+PORT=4000 MIX_ENV=dev elixir --erl "-detached" -S mix phx.server
+(si changement de port, il faut aussi modifier à d'autres endroits)
+
+https://hexdocs.pm/phoenix/deployment.html
+Pour récupérer le PID de suite : 
+elixir --detached -e "File.write! 'pid', :os.getpid" -S mix phoenix.server
+
+Pour le détecter : 
+	ss -tulpn | grep :4000
+à corréler avec : 
+	ps aux | grep elixir
+
+
+
