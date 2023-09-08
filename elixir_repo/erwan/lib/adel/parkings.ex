@@ -20,14 +20,16 @@ defmodule Adel.Parkings do
   def list_parkings do
     Parking
     |> order_by([p], desc: p.derniere_actualisation_bo)
-    |> Repo.all(limit: 100)
+    |> limit(100)
+    |> Repo.all()
   end
 
   def list_parkings_reduced() do
     Parking
     |> select([p], {p.nom, p.nom})
     |> distinct(true)
-    |> Repo.all(limit: 100)
+    |> limit(100)
+    |> Repo.all()
   end
 
   def list_parkings("Tous les parkings") do
@@ -178,7 +180,8 @@ defmodule Adel.Parkings do
 
   def list_rochelle_parkings() do
     ParkingRochelle
-    |> Repo.all(limit: 100)
+    |> limit(100)
+    |> Repo.all()
   end
 
   def list_rochelle_parkings_reduced() do
