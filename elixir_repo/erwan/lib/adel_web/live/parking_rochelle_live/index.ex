@@ -9,8 +9,6 @@ defmodule AdelWeb.ParkingRochelleLive.Index do
     parking_list = Parkings.list_rochelle_parkings()
     select_parking = Parkings.list_rochelle_parkings_reduced()
 
-    #   {:ok, socket |> stream(:rochelle_parkings, parking_list)}
-    # end
     {:ok,
      socket
      |> assign(:select_parking, %{
