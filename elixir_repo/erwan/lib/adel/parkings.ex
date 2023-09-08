@@ -180,6 +180,7 @@ defmodule Adel.Parkings do
 
   def list_rochelle_parkings() do
     ParkingRochelle
+    |> order_by([p], desc: p.date_comptage)
     |> limit(100)
     |> Repo.all()
   end
