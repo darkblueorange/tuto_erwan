@@ -37,7 +37,11 @@ defmodule AdelWeb.ParkingRochelleLive.FormComponent do
         <.input field={@form[:nb_pmr]} type="number" label="Nb pmr" />
         <.input field={@form[:coord_y]} type="number" label="Coord y" step="any" />
         <.input field={@form[:coord_x]} type="number" label="Coord x" step="any" />
-        <.input field={@form[:nb_voitures_electriques_dispo]} type="number" label="Nb voitures electriques dispo" />
+        <.input
+          field={@form[:nb_voitures_electriques_dispo]}
+          type="number"
+          label="Nb voitures electriques dispo"
+        />
         <.input field={@form[:total_count]} type="number" label="Total count" />
         <.input field={@form[:full_binary_text]} type="text" label="Full binary text" />
         <.input field={@form[:nb_pmr_dispo]} type="number" label="Nb pmr dispo" />

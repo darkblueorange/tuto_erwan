@@ -20,14 +20,14 @@ defmodule Adel.Parkings do
   def list_parkings do
     Parking
     |> order_by([p], desc: p.derniere_actualisation_bo)
-    |> Repo.all()
+    |> Repo.all(limit: 100)
   end
 
   def list_parkings_reduced() do
     Parking
     |> select([p], {p.nom, p.nom})
     |> distinct(true)
-    |> Repo.all()
+    |> Repo.all(limit: 100)
   end
 
   def list_parkings("Tous les parkings") do
@@ -171,8 +171,14 @@ defmodule Adel.Parkings do
       [%ParkingRochelle{}, ...]
 
   """
-  def list_rochelle_parkings do
-    Repo.all(ParkingRochelle)
+
+  # def list_rochelle_parkings do
+  #   Repo.all(ParkingRochelle)
+  # end
+
+  def list_rochelle_parkings() do
+    ParkingRochelle
+    |> Repo.all(limit: 100)
   end
 
   def list_rochelle_parkings_reduced() do

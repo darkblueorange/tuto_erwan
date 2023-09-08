@@ -63,6 +63,7 @@
     fn {_id, parking_rochelle} -> JS.navigate(~p"/rochelle_parkings/#{parking_rochelle}") end
   }
 >
+  <:col :let={{_id, parking_rochelle}} label="ID"><%= parking_rochelle.id %></:col>
   <:col :let={{_id, parking_rochelle}} label="Nb places"><%= parking_rochelle.nb_places %></:col>
   <:col :let={{_id, parking_rochelle}} label="Nb autopartage">
     <%= parking_rochelle.nb_autopartage %>
